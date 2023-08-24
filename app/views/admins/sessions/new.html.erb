@@ -1,0 +1,48 @@
+<section class="w-screen py-8">
+  <% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
+  <% end %>
+
+  <div class="flex mx-auto shadow-md border rounded w-2/3">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'border px-8 py-4 bg-gray-50 w-96' }) do |f| %>
+      <h2 class="text-2xl my-2 antialiased font-medium">Admin Log in</h2>
+
+      <div class="field my-8">
+        <%= f.email_field :email, autofocus: true, placeholder: 'Email', autocomplete: "email", class: "w-full rounded"%>
+      </div>
+
+      <div class="field my-8">
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Password', class: "w-full rounded" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field my-5">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="flex justify-center actions my-5">
+        <%= f.submit "Login", class: 'login-button transition duration-300 rounded cursor-pointer text-white w-full py-2 bg-green-600 mx-auto tracking-wide' %>
+      </div>
+
+      <div>
+        <%= render "admins/shared/links" %>
+      </div>
+    <% end %>
+
+    <div class="relative bg-cover flex-grow" style="background-image: url(<%= image_path('papillon.jpg') %>); ">
+      <span class="absolute bottom-0 right-0 text-gray-600">
+        Image by 
+        <a href="https://pixabay.com/users/jennigut-4012257/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1919161">
+          JenniGut
+        </a> from 
+        <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1919161">
+          Pixabay
+        </a>
+      </span>
+    </div>
+  </div>
+</section>
