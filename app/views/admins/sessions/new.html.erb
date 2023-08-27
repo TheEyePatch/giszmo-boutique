@@ -1,9 +1,5 @@
-<section class="w-screen py-8">
-  <% flash.each do |type, msg| %>
-    <div>
-      <%= msg %>
-    </div>
-  <% end %>
+<section class="w-screen py-8 relative">
+  <%= render partial: 'partials/flash_messages'%>
 
   <div class="flex mx-auto shadow-md border rounded w-2/3">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'border px-8 py-4 bg-gray-50 w-96' }) do |f| %>
