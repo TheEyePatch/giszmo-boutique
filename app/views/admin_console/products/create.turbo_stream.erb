@@ -1,0 +1,27 @@
+<% if product %>
+  <%= turbo_stream.update 'modal' do %>
+  <% end %>
+
+  <%= turbo_stream.prepend 'product-table-body' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <% end %>
+
+  <%= turbo_stream.append 'product-table-body' do%>
+    <tr class="border-b hover:bg-gray-100 hover:cursor-pointer hover:shadow">
+      <td class="p-4 max-w-xl w-screen"><%= product.name%></td>
+      <td class="p-4 max-w-sm w-20"><%= product.price%></td>
+      <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
+      <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>
+      <td class="p-4">Action</td>
+    </tr>
+  <% end %>
+
+<% elsif flash.present? %>
+  <%= turbo_stream.prepend 'new_post' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <% end %>
+<% end %>

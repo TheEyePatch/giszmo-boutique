@@ -1,0 +1,39 @@
+<section class="container relative">
+  <%= render partial: 'partials/flash_messages'%>
+
+  <%# New Button %>
+  <div class="flex justify-end my-3">
+    <%= button_to '+ Add Product',
+      new_admin_console_product_path,
+      data: { turbo_frame: 'modal' },
+      method: :get,
+      class: 'bg-blue-700 text-white font-semibold p-2 text-md rounded-md shadow-md hover:bg-blue-100 hover:text-blue-700 hover:border hover:border-blue-500'
+    %>
+  </div>
+  
+  <table class="mx-auto">
+    <thead>
+      <tr class="border-b text-gray-800">
+        <td class="p-2 px-4 max-w-xl w-screen">Name</td>
+        <td class="p-2 px-4 max-w-sm w-20">Price</td>
+        <td class="p-2 px-4 max-w-sm">Created At</td>
+        <td class="p-2 px-4 max-w-sm">Updated At</td>
+        <td class="p-2 px-4 max-w-sm">Actions</td>
+      </tr>
+    </thead>
+
+    <tbody id="product-table-body">
+      <% @products.each do |product| %>
+      <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:cursor-pointer hover:shadow">
+        <td class="p-4 max-w-xl w-screen"><%= product.name%></td>
+        <td class="p-4 max-w-sm"><%= product.price%></td>
+        <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
+        <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>
+        <td class="p-4">Action</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%# NOTE: https://dzone.com/articles/rails-creating-modals %>
+</section>

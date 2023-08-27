@@ -6,16 +6,27 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "tailwind", "inter-font"%>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <%= turbo_frame_tag 'modal', data: { controller: 'modals'} %>
     <%= render 'partials/header'  %>
     <main class="container mx-auto mt-16 flex">
       <%= yield %>
     </main>
   </body>
+
+  <script>
+    document.addEventListener("turbo:frame-missing", function(event) {
+      // TODO: Report this event somewhere...
+    
+      // Visit the response
+      event.preventDefault()
+      console.log(event.detail.response)
+      event.detail.visit(event.detail.response)
+    })
+  </script>
 </html>
