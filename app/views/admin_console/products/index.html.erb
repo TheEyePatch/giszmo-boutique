@@ -24,13 +24,7 @@
 
     <tbody id="product-table-body">
       <% @products.each do |product| %>
-      <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:cursor-pointer hover:shadow">
-        <td class="p-4 max-w-xl w-screen"><%= product.name%></td>
-        <td class="p-4 max-w-sm"><%= product.price%></td>
-        <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
-        <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>
-        <td class="p-4">Action</td>
-      </tr>
+        <%= render partial: 'table_row', locals: { product: product }%>
       <% end %>
     </tbody>
   </table>

@@ -11,6 +11,11 @@
         <%= f.label :price %><br />
         <%= f.text_field :price, class: 'w-64 rounded'%>
       </div>
+
+      <div class="field">
+        <label>Detail</label><br />
+        <%= f.rich_text_area :detail %>
+      </div>
       
       <div class="my-2 flex justify-end">
         <%= f.submit "Submit", class: 'mx-1 text-white p-2 rounded bg-green-500 w-auto hover:cursor-pointer hover:bg-green-100 hover:text-green-800 border'%>

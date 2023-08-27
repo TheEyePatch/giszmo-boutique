@@ -9,13 +9,7 @@
   <% end %>
 
   <%= turbo_stream.append 'product-table-body' do%>
-    <tr class="border-b hover:bg-gray-100 hover:cursor-pointer hover:shadow">
-      <td class="p-4 max-w-xl w-screen"><%= product.name%></td>
-      <td class="p-4 max-w-sm w-20"><%= product.price%></td>
-      <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
-      <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>
-      <td class="p-4">Action</td>
-    </tr>
+    <%= render partial: 'table_row', locals: { product: product}%>
   <% end %>
 
 <% elsif flash.present? %>
