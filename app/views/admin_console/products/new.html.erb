@@ -1,15 +1,31 @@
 <%= turbo_frame_tag 'modal' do %>
   <div class="z-10 fixed flex items-center top-0 w-screen h-screen bg-opacity-25 bg-black shadow p-1">
-    <%= form_with model: @product, url: admin_console_products_path , html: { id: 'new_post', class: 'relative py-4 px-8 mx-auto rounded shadow bg-white w-auto' } do |f| %>
+    <%= form_with model: @product, url: admin_console_products_path , html: { id: 'new_post', class: 'relative py-4 px-8 mx-auto rounded shadow bg-white w-auto max-w-screen-lg overflow-y-auto max-h-128' } do |f| %>
       <h2 class="text-2xl my-2 antialiased font-medium">New Product</h2>
-      <div class="my-8">
-        <%= f.label :name %><br />
-        <%= f.text_field :name , class: 'w-64 rounded'%>
-      </div>
+      <div class="flex justify-around">
+        <div>
+          <div class="my-8">
+            <%= f.label :name %><br />
+            <%= f.text_field :name , class: 'w-64 rounded'%>
+          </div>
 
-      <div class="my-8">
-        <%= f.label :price %><br />
-        <%= f.text_field :price, class: 'w-64 rounded'%>
+          <div class="my-8">
+            <%= f.label :price %><br />
+            <%= f.text_field :price, class: 'w-64 rounded'%>
+          </div>
+        </div>
+
+        <div data-controller="previews">
+          <div class="my-8">
+            <%= f.label :images%><br>
+            <%= f.file_field :images,
+              direct_upload: true,
+              multiple: true,
+              data: { previews_target: 'input', action: 'change->previews#preview' } %>
+          </div>
+
+          <div id="image-previews" class="grid grid-cols-2 gap-1 max-h-44 overflow-y-auto" data-previews-target="previewContainer"></div>
+        </div>
       </div>
 
       <div class="field">
@@ -26,8 +42,6 @@
           }, class: 'mx-1 text-white p-2 rounded bg-red-500 w-auto hover:cursor-pointer hover:bg-red-100 hover:text-red-800 border'
         %>
       </div>
-      <!-- form_for @object, html: { multipart: true }, do |f| -->
-      <!-- form_for @object, html: { class: "classname" }, do |f| -->
     <% end %>
   </div>
 <% end %>

@@ -1,8 +1,8 @@
-<section class="container relative">
+<section class="container relative px-2">
   <%= render partial: 'partials/flash_messages'%>
 
   <%# New Button %>
-  <div class="flex justify-end my-3">
+  <div class="flex justify-end m-3">
     <%= button_to '+ Add Product',
       new_admin_console_product_path,
       data: { turbo_frame: 'modal' },
