@@ -1,24 +1,27 @@
 <% if flash[:notice].present? && flash[:notice].is_a?(Array) %>
-  <% flash[:notice].each do |msg| %>
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert" data-duration="5000" data-controller="flash" data-flash-target="notice">
-      <p><%= msg%></p>
-    </div>
-  <% end %>
-
+  <div class="absolute top-0">
+    <% flash[:notice].each do |msg| %>
+      <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert"  data-controller="flash" data-flash-target="notice">
+        <p><%= msg%></p>
+      </div>
+    <% end %>
+  </div>
 <% elsif flash[:alert].present? && flash[:alert].is_a?(Array) %>
-  <% flash[:alert].each do |msg| %>
-    <div class="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert" data-duration="5000" data-controller="flash" data-flash-target="notice">
-      <%= msg %>
-    </div>
-  <% end %>
+  <div class="absoulte top-0">
+    <% flash[:alert].each do |msg| %>
+      <div class="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert" data-controller="flash" data-flash-target="notice">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
 
 <% elsif flash[:notice].present? %>
-  <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert" data-duration="5000" data-controller="flash" data-flash-target="notice">
+  <div class="absoulte top-0 bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert" data-controller="flash" data-flash-target="notice">
     <p><%= flash[:notice]%></p>
   </div>
 
 <% elsif flash[:alert].present? %>
-  <div class="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert" data-duration="5000" data-controller="flash" data-flash-target="notice">
+  <div class="absoulte top-0 my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert" data-controller="flash" data-flash-target="notice">
     <%= flash[:alert] %>
   </div>
 <% end %>

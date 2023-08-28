@@ -7,7 +7,7 @@ export default class extends Controller {
   connect() {
     setTimeout(() => {
       this.noticeTarget.remove()
-    }, 5000)
+    }, 3000)
   }
 
   close() {
