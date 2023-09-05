@@ -36,4 +36,16 @@ export default class extends Controller {
 
     preview.appendChild(image)
   }
+
+  // For carousels on show page
+
+  selectImage(e) {
+    const preview = this.previewContainerTarget
+    preview.innerHTML = ''
+    
+    let image = document.createElement('img')
+    image.setAttribute('src', e.currentTarget.src)
+    image.setAttribute('class', 'h-full mx-auto')
+    preview.appendChild(image)
+  }
 }
