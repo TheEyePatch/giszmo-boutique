@@ -1,8 +1,8 @@
-<section class="container relative px-10">
+<section class="container relative px-10 w-screen">
   <%= render partial: 'partials/flash_messages'%>
 
   <%# New Button %>
-  <div class="flex justify-end m-3">
+  <div class="mx-auto flex justify-end m-3">
     <%= button_to '+ Add Product',
       new_admin_console_product_path,
       data: { turbo_frame: 'modal' },
@@ -11,7 +11,7 @@
     %>
   </div>
   
-  <table class="mx-auto">
+  <table class="mx-auto w-full">
     <thead>
       <tr class="border-b text-gray-800">
         <td class="p-2 px-4 max-w-xl w-screen">Name</td>
