@@ -8,7 +8,7 @@
     </div>
   <% end %>
 
-  <%= turbo_stream.append 'product-table-body' do%>
+  <%= turbo_stream.prepend 'product-table-body' do%>
     <%= render partial: 'table_row', locals: { product: product}%>
   <% end %>
 

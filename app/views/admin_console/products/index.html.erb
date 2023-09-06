@@ -24,7 +24,17 @@
 
     <tbody id="product-table-body">
       <% @products.each do |product| %>
-        <%= render partial: 'table_row', locals: { product: product }%>
+        <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:cursor-pointer hover:shadow">
+          <td class="max-w-xl w-screen">
+            <%= button_to product.name, admin_console_product_path(product), class: 'text-left p-4 h-full w-full', method: :get%>
+          </td>
+          <td class="p-4 max-w-sm">
+            <%= button_to product.price, admin_console_product_path(product), class: 'text-left p-4 h-full w-full', method: :get%>
+          </td>
+          <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
+          <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>
+          <td class="p-4">Action</td>
+        </tr>
       <% end %>
     </tbody>
   </table>
