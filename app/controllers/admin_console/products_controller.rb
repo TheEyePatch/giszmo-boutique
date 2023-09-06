@@ -5,8 +5,7 @@ module AdminConsole
     ].freeze
 
     def index
-      # binding.pry
-      @products = Product.all
+      @products = Product.order(id: :desc).page(params[:page])
     end
 
     def new
@@ -35,7 +34,7 @@ module AdminConsole
     private
 
     def product_params
-      params.require(:product).permit(:name, :description, :price, :detail, images: [])
+      params.require(:product).permit(:name, :price, :detail, images: [])
     end
 
     def response_formatter(format, type, messages, method, locals)

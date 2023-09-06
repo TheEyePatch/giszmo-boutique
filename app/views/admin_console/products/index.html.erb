@@ -29,5 +29,9 @@
     </tbody>
   </table>
 
+  <div class="mx-auto flex justify-center p-4 border">
+    <%= paginate @products, window: 3 %>
+  </div>
+
   <%# NOTE: https://dzone.com/articles/rails-creating-modals %>
 </section>
