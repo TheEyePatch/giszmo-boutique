@@ -45,7 +45,7 @@ export default class extends Controller {
     
     let image = document.createElement('img')
     image.setAttribute('src', e.currentTarget.src)
-    image.setAttribute('class', 'h-full mx-auto')
+    image.setAttribute('class', 'mx-auto')
     preview.appendChild(image)
   }
 }

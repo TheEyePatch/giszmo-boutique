@@ -1,29 +1,35 @@
-<section class="grid grid-cols-2">
+<section class="grid grid-cols-2 mx-auto">
   <section class="image-section relative flex flex-col justify-between px-4" data-controller="previews">
-    <div id="main-image" class="relative h-4/6" data-previews-target="previewContainer">
-      <%= image_tag @product.images.first, class: 'h-full mx-auto'%>
-    </div>
-
-    <div class="flex relative rounded overflow-x-hidden border border-grey-100">
-      <%# LEFT ARROW %>
-      <span class="text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50">
-        <
-      </span>
-
-      <div id="image-list" class="flex">
-        <% @product.images.each do |image| %>
-          <%= image_tag image, class: 'w-40 m-1', data: { action: 'click->previews#selectImage' } %>
-        <% end %>
+    <% if @product.images.present? %>
+      <div id="main-image" class="relative h-4/6 w-auto" data-previews-target="previewContainer">
+        <%= image_tag @product.images.first, class: 'mx-auto'%>
       </div>
 
-      <%# RIGHT ARROW %>
-      <span class="text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50">
-        >
-      </span>
-    </div>
+      <div class="flex relative rounded overflow-x-hidden border border-grey-100">
+        <%# LEFT ARROW %>
+        <span class="text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50">
+          <
+        </span>
+
+        <div id="image-list" class="flex">
+          <% @product.images.each do |image| %>
+            <%= image_tag image, class: 'w-40 m-1', data: { action: 'click->previews#selectImage' } %>
+          <% end %>
+        </div>
+
+        <%# RIGHT ARROW %>
+        <span class="text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50">
+          >
+        </span>
+      </div>
+    <% else %>
+      <div class="h-96 w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
+        +
+      </div>
+    <% end %>
   </section>
 
-  <section class="meta-data-section w-full border px-2">
+  <section class="meta-data-section w-full px-2 min-w-128">
     <div class="text-lg p-2">
       <h1 class="text-4xl font-semibold"><%= @product.name%></h1>
 
@@ -43,7 +49,7 @@
       <%# TODO: List sizes %>
     </div>
 
-    <div class="p-2 text-md">
+    <div class="p-2 text-md text-justify">
       <h2 class="font-semibold tracking-wide">DETAILS:</h2>
       <%= @product.detail %>
     </div>
