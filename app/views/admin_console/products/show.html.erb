@@ -1,8 +1,8 @@
 <section class="grid grid-cols-2 mx-auto">
   <section class="image-section relative flex flex-col justify-between px-4" data-controller="previews">
     <% if @product.images.present? %>
-      <div id="main-image" class="relative h-4/6 w-auto" data-previews-target="previewContainer">
-        <%= image_tag @product.images.first, class: 'mx-auto'%>
+      <div id="main-image" class="relative h-4/6 w-auto my-2" data-previews-target="previewContainer">
+        <%= image_tag @product.images.first, class: 'mx-auto border'%>
       </div>
 
       <div class="flex relative rounded overflow-x-hidden border border-grey-100">
@@ -41,7 +41,18 @@
 
     <div class="p-2 text-lg">
       <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
-      <%# TODO: List Variants (Colors, designs, etc.) %>
+
+      <div class="flex">
+        <% @product.variants&.split(',')&.each do |variant| %>
+          <div class="border rounded-full w-10 h-10 mx-1" style="background-color:<%= variant%>;"></div>
+        <% end %>
+      </div>
+
+      <div class="flex flex-wrap max-h-50 overflow-y-auto border">
+        <% @product.image_variants.each do |image|%>
+          <%= image_tag image, class: 'w-24 m-1 border border-black rounded', data: { action: 'click->previews#selectImage' } %>
+        <% end %>
+      </div>
     </div>
 
     <div class="p-2 text-md">
