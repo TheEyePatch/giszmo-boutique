@@ -4,11 +4,17 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [
     'input',
-    'previewContainer'
+    'previewContainer',
+    'imageList'
   ]
 
   connect() {
-    console.log(this.previewContainerTarget)
+    // console.log(this.previewContainerTarget)
+    // console.log(this.imageListTarget)
+    this.counter = 1
+    // console.log(this.imageListTarget.firstElementChild)
+    // console.log(this.imageListTarget.firstElementChild.clientWidth)
+    // console.log(this.imageListTarget)
   }
 
   preview(e) {
@@ -51,5 +57,16 @@ export default class extends Controller {
     image.setAttribute('src', e.currentTarget.src)
     image.setAttribute('class', 'mx-auto')
     preview.appendChild(image)
+  }
+
+  selectRightArrow() {
+    // const preview = this.previewContainerTarget
+    // this.imageListTarget.style.transform = `translateX( ${ - this.imageListTarget.firstElementChild.clientWidth * this.counter}px)`
+    // this.counter++
+    this.imageListTarget.scrollBy({left: this.imageListTarget.firstElementChild.clientWidth})
+  }
+
+  selectLeftArrow() {
+    this.imageListTarget.scrollBy({left: -this.imageListTarget.firstElementChild.clientWidth})
   }
 }

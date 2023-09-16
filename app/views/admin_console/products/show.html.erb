@@ -7,18 +7,22 @@
 
       <div class="flex relative rounded overflow-x-hidden border border-grey-100">
         <%# LEFT ARROW %>
-        <span class="text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50">
+        <span class="z-10 text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
+          data-action="click->previews#selectLeftArrow"
+        >
           <
         </span>
 
-        <div id="image-list" class="flex">
+        <div class="flex overflow-x-scroll" data-previews-target="imageList">
           <% @product.images.each do |image| %>
-            <%= image_tag image, class: 'w-40 m-1', data: { action: 'click->previews#selectImage' } %>
+            <%= image_tag image, id: image.id, class: 'w-40 m-1', data: { action: 'click->previews#selectImage' } %>
           <% end %>
         </div>
 
         <%# RIGHT ARROW %>
-        <span class="text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50">
+        <span class="z-10 text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
+          data-action="click->previews#selectRightArrow"
+        >
           >
         </span>
       </div>
@@ -31,6 +35,7 @@
 
   <section class="meta-data-section w-full px-2 min-w-128">
     <div class="text-lg p-2">
+      <button>Edit</button>
       <h1 class="text-4xl font-semibold"><%= @product.name%></h1>
 
       <div class="mt-1">
@@ -48,9 +53,9 @@
         <% end %>
       </div>
 
-      <div class="flex flex-wrap max-h-50 overflow-y-auto border">
+      <div class="flex flex-wrap max-h-50 overflow-y-auto my-5">
         <% @product.image_variants.each do |image|%>
-          <%= image_tag image, class: 'w-24 m-1 border border-black rounded', data: { action: 'click->previews#selectImage' } %>
+          <%= image_tag image, class: 'w-24 m-1 border hover:border-black rounded', data: { action: 'click->previews#selectImage' } %>
         <% end %>
       </div>
     </div>
