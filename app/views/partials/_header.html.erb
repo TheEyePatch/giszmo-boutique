@@ -1,9 +1,11 @@
-<div class="flex bg-white z-10 justify-between fixed w-screen top-0 left-0 px-8 py-3 shadow antialiased">
-  <h1 class="text-2xl font-medium">HarmonyHutch</h1>
-  <ul class="flex justify-between items-center min-w-min w-1/3"></ul>
+<div id="nav"
+  class="transition-colors duration-300 flex z-20 justify-between fixed w-screen top-0 left-0 px-8 py-3 <%= current_page?(root_path) ? 'text-white border-b border-opacity-70' : 'bg-white' %> border-gray-300 shadow"
+  >
+  <h1 class="text-2xl font-serif font-medium">FuzzyFinds</h1>
+  <ul class="flex justify-between min-w-min w-1/3"></ul>
   <% if request.path.split('/').include?('admin_console') %>
     <%= render 'partials/admin_header'%>
-  <% elsif request.path.split('/').include?('admin_console') %>
+  <% elsif request.path.exclude?('admin') %>
     <li class="list-none">Home</li>
     <li class="list-none">Products</li>
     <li class="list-none">About</li>
