@@ -1,6 +1,5 @@
 const nav = document.getElementById('nav')
 
-console.log(nav)
 
 window.addEventListener('scroll', (e) => {
   if(window.scrollY > 10) {
