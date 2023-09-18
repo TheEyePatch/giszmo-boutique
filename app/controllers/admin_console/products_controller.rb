@@ -12,6 +12,19 @@ module AdminConsole
       @product = Product.new
     end
 
+    def edit
+      @product = Product.find params[:id]
+    end
+
+    def update
+      @product = Product.find params[:id]
+      if @product.update(product_params)
+        redirect_to admin_console_product_path(@product), notice: 'OK'
+      else
+        redirect_to edit_admin_console_product_path(@product), alert: @product.errors
+      end
+    end
+
     def create
       @product = Product.new(product_params)
       if @product.valid? && @product.save

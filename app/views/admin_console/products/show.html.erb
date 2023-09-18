@@ -1,8 +1,8 @@
-<section class="grid grid-cols-2 mx-auto">
-  <section class="image-section relative flex flex-col justify-between px-4" data-controller="previews">
+<section class="grid grid-cols-2 mx-auto text-gray-700">
+  <section class="image-section relative px-4" data-controller="previews">
     <% if @product.images.present? %>
-      <div id="main-image" class="relative h-4/6 w-auto my-2" data-previews-target="previewContainer">
-        <%= image_tag @product.images.first, class: 'mx-auto border'%>
+      <div id="main-image" class="relative h-3/5 w-auto my-2" data-previews-target="previewContainer">
+        <%= image_tag @product.images.first, class: 'mx-auto border max-h-full'%>
       </div>
 
       <div class="flex relative rounded overflow-x-hidden border border-grey-100">
@@ -33,18 +33,22 @@
     <% end %>
   </section>
 
-  <section class="meta-data-section w-full px-2 min-w-128">
-    <div class="text-lg p-2">
-      <button>Edit</button>
+  <section class="meta-data-section w-full pr-6 min-w-128">
+    <div class="flex text-lg justify-between">
       <h1 class="text-4xl font-semibold"><%= @product.name%></h1>
-
-      <div class="mt-1">
-        <span class="font-semibold tracking-wide">PRICE:</span>
-        <span class="">PHP <%= @product.price %></span>
-      </div>
+      <%= button_to 'Edit',
+        edit_admin_console_product_path(@product),
+        method: :get,
+        class: 'bg-blue-700 text-white font-semibold py-1 px-2 text-md rounded-md shadow-md hover:bg-blue-100 hover:text-blue-700 hover:border hover:border-blue-500'
+      %>
     </div>
 
-    <div class="p-2 text-lg">
+    <div class="mt-1">
+      <span class="font-semibold tracking-wide">PRICE:</span>
+      <span class="">PHP <%= @product.price %></span>
+    </div>
+
+    <div class="text-lg">
       <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
 
       <div class="flex">
