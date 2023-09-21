@@ -1,6 +1,7 @@
 <div id="nav"
-  class="transition-colors duration-300 flex z-20 justify-between fixed w-screen top-0 left-0 px-8 py-3 <%= current_page?(root_path) ? 'text-white border-b border-opacity-70' : 'bg-white' %> border-gray-300 shadow"
+  class="<%= current_page?(root_path) ? 'text-white border-b border-opacity-70' : 'bg-white' %> transition-colors duration-300 flex z-20 justify-between fixed w-screen top-0 left-0 px-8 py-3 border-gray-300 shadow"
   >
+  <%# binding.pry%>
   <h1 class="text-2xl font-serif font-medium">FuzzyFinds</h1>
   <ul class="flex justify-between min-w-min w-1/3"></ul>
   <% if request.path.split('/').include?('admin_console') %>
