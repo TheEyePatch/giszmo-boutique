@@ -13,10 +13,14 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       maxHeight: {
-        '128': '32rem' 
+        '128': '32rem',
+        '64': ''
       },
       minWidth: {
         '128': '32rem'
+      },
+      width: {
+        '100': '32rem'
       }
     },
   },

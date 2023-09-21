@@ -14,9 +14,10 @@
   <body>
     <%= turbo_frame_tag 'modal', data: { controller: 'modals'} %>
     <%= render 'partials/header'  %>
-    <main class="container mx-auto mt-16 flex">
+    <main class="container mx-auto flex">
       <%= yield %>
     </main>
+    <%= render 'partials/footer'%>
   </body>
 
   <script>

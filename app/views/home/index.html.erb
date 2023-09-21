@@ -1,2 +1,33 @@
+<section class="container relative">
+  <div style="background-image: url(<%= image_path('pets-home.jpg')%>);" class="relative bg-gray-300 h-screen bg-cover bg-local"> </div>
+  <div class="top-0 text-gray-50 flex justify-center items-center absolute z-10 bg-black h-screen w-screen bg-opacity-50">
+    <h1 class="text-8xl font-serif border-t-4 border-b-4 p-2">FuzzyFinds</h1>
 
-<h1 class="text-red-300 italic font-bold">Home</h1>
+    <span class="absolute bottom-0 right-0">
+      Image by <a href="https://pixabay.com/users/huoadg5888-8934889/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3715733">huoadg5888</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3715733">Pixabay</a>
+    </span>
+  </div>
+
+  <div class="mx-auto">
+    <div class="p-10 flex flex-wrap justify-center border rounded shadow">
+      <% @products.each do |product| %>
+        <div class="shadow rounded m-4 w-72">
+          <% if product.images.present? %>
+            <%= image_tag product.images.first, class: 'h-64 rounded' %>
+          <% else %>
+            <div class="w-full bg-gray-200 h-64 text-center text-white flex justify-center items-center">
+              <h1 class="text-xl">No Image</h1>
+            </div>
+          <% end %>
+
+          <h1 class="text-xl p-2"><%= product.name %></h1>
+          <h2 class="p-2 font-bold">Php <%= product.price %></h2>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<script>
+  const header = document.getElementById('')
+</script>
