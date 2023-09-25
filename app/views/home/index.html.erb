@@ -9,9 +9,9 @@
   </div>
 
   <div class="mx-auto">
-    <div class="p-10 flex flex-wrap justify-center border rounded shadow">
+    <div class="p-10 grid grid-cols-4 gap-2 border rounded shadow">
       <% @products.each do |product| %>
-        <div class="shadow rounded m-4 w-72">
+        <div class="shadow bg-white rounded w-72 box-border hover:-mt-1 hover:z-10 hover:scale-110 cursor-pointer hover:border hover:border-purple-700 hover:border-2">
           <% if product.images.present? %>
             <%= image_tag product.images.first, class: 'h-64 rounded' %>
           <% else %>
@@ -20,8 +20,10 @@
             </div>
           <% end %>
 
-          <h1 class="text-xl p-2"><%= product.name %></h1>
-          <h2 class="p-2 font-bold">Php <%= product.price %></h2>
+          <div>
+            <h1 class="text-xl p-2"><%= product.name %></h1>
+            <h2 class="p-2 font-bold">Php <%= product.price %></h2>
+          </div>
         </div>
       <% end %>
     </div>
