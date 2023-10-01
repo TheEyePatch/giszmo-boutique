@@ -1,4 +1,4 @@
-<section class="w-screen h-96 bg-gray-800 text-white px-2 py-5 flex justify-around">
+<section class="relative bottom-0 w-screen h-96 bg-gray-800 text-white px-2 py-5 flex justify-around">
   <div class="h-44 w-100">
     <h1 class="text-8xl font-serif border-t-4 border-b-4 p-2">FuzzyFinds</h1>
     <p class="p-2 text-justify">
@@ -11,7 +11,9 @@
 
   <ul class="text-white">
     <h1 class="text-xl mb-5 font-bold">More Links</h1>
-    <li>Home</li>
+    <li>
+      <%= link_to 'Home', root_path %>
+    </li>
     <li>About us</li>
     <li>Contact us</li>
   </ul>

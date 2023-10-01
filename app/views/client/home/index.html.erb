@@ -9,25 +9,9 @@
   </div>
 
   <div class="mx-auto">
-    <div class="p-10 flex flex-wrap justify-center border rounded shadow">
-      <% @products.each do |product| %>
-        <div class="shadow rounded m-4 w-72">
-          <% if product.images.present? %>
-            <%= image_tag product.images.first, class: 'h-64 rounded' %>
-          <% else %>
-            <div class="w-full bg-gray-200 h-64 text-center text-white flex justify-center items-center">
-              <h1 class="text-xl">No Image</h1>
-            </div>
-          <% end %>
-
-          <h1 class="text-xl p-2"><%= product.name %></h1>
-          <h2 class="p-2 font-bold">Php <%= product.price %></h2>
-        </div>
-      <% end %>
-    </div>
+    <% if @featured.present? %>
+      <h1 class="text-center text-2xl p-5 font-semibold text-gray-700">FEATURED PRODUCTS</h1>
+      <%= render 'section', collection: @featured%>
+    <% end %>
   </div>
 </section>
-
-<script>
-  const header = document.getElementById('')
-</script>
