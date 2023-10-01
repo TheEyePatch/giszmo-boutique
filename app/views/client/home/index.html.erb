@@ -1,0 +1,17 @@
+<section class="container relative">
+  <div style="background-image: url(<%= image_path('pets-home.jpg')%>);" class="relative bg-gray-300 h-screen bg-cover bg-local"> </div>
+  <div class="top-0 text-gray-50 flex justify-center items-center absolute z-10 bg-black h-screen w-screen bg-opacity-50">
+    <h1 class="text-8xl font-serif border-t-4 border-b-4 p-2">FuzzyFinds</h1>
+
+    <span class="absolute bottom-0 right-0">
+      Image by <a href="https://pixabay.com/users/huoadg5888-8934889/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3715733">huoadg5888</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3715733">Pixabay</a>
+    </span>
+  </div>
+
+  <div class="mx-auto">
+    <% if @featured.present? %>
+      <h1 class="text-center text-2xl p-5 font-semibold text-gray-700">FEATURED PRODUCTS</h1>
+      <%= render 'section', collection: @featured%>
+    <% end %>
+  </div>
+</section>

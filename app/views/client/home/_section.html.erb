@@ -1,0 +1,18 @@
+<div class="p-10 grid grid-cols-4 gap-2">
+  <% collection.each do |item| %>
+    <div class="shadow bg-white rounded w-72 box-border hover:-mt-1 hover:z-10 hover:scale-110 cursor-pointer hover:border hover:border-purple-700 hover:border-2">
+      <% if item.images.present? %>
+        <%= image_tag item.images.first, class: 'h-64 rounded' %>
+      <% else %>
+        <div class="w-full bg-gray-200 h-64 text-center text-white flex justify-center items-center">
+          <h1 class="text-xl">No Image</h1>
+        </div>
+      <% end %>
+
+      <div>
+        <h1 class="text-xl p-2"><%= item.name %></h1>
+        <h2 class="p-2 font-bold">Php <%= item.price %></h2>
+      </div>
+    </div>
+  <% end %>
+</div>
