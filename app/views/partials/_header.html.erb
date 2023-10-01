@@ -17,3 +17,23 @@
   <% end %>
   </ul>
 </div>
+
+
+<script>
+  <% if current_page?(root_path) %>
+    var nav = document.getElementById('nav')
+
+    window.addEventListener('scroll', (e) => {
+      if(window.scrollY > 20) {
+        nav.classList.add('bg-white')
+        nav.style.color = '#000000'
+        console.log(nav.style.color)
+      } else {
+        nav.classList.remove('bg-white')
+        nav.classList.remove('text-gray-900')
+        nav.style.color = '#ffffff'
+      }
+    })
+
+  <% end %>
+</script>
