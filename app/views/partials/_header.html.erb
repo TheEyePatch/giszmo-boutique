@@ -1,4 +1,4 @@
-<div id="nav"
+<div id="<%= request.path.split('/').include?('admin_console') ? 'admin-nav' : 'nav' %>"
   class="<%= current_page?(root_path) ? 'text-white border-b border-opacity-70' : 'bg-white' %> transition-colors duration-300 flex z-20 justify-between fixed w-screen top-0 left-0 px-8 py-3 border-gray-300 shadow"
   >
   <%# binding.pry%>
@@ -7,8 +7,12 @@
   <% if request.path.split('/').include?('admin_console') %>
     <%= render 'partials/admin_header'%>
   <% elsif request.path.exclude?('admin') %>
-    <li class="list-none">Home</li>
-    <li class="list-none">Products</li>
+    <li class="list-none">
+      <%= link_to 'Home', root_path %>
+    </li>
+    <li class="list-none">
+      <%= link_to 'Products', products_path%>
+    </li>
     <li class="list-none">About</li>
   <% end %>
   </ul>
