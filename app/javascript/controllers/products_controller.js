@@ -5,7 +5,8 @@ export default class extends Controller {
     'colorField',
     'colorPicker',
     'colorGroup',
-    'imageGroup'
+    'imageGroup',
+    'sizesContainer'
   ]
 
   connect() {
@@ -39,5 +40,26 @@ export default class extends Controller {
         this.imageGroupTarget.removeAttribute('hidden')
         break;
     }
+  }
+
+  addSize(e) {
+    e.preventDefault();
+
+    const sizeField = document.createElement('input')
+    sizeField.setAttribute('type', 'text')
+    sizeField.setAttribute('name', 'product[sizes][]')
+    sizeField.setAttribute('class', 'm-1 w-1/3 border-gray-700 border-0 border-b-2 bg-gray-50')
+    sizeField.setAttribute('required', 'true')
+    sizeField.addEventListener('keydown', (e) => {
+      const key = e.code
+      if(key == 'Backspace') sizeField.remove()
+    })
+    const container = this.sizesContainerTarget;
+
+    container.appendChild(sizeField)
+  }
+
+  removeField(e) {
+    console.log(e)
   }
 }
