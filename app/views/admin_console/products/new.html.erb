@@ -35,7 +35,7 @@
       </div>
       
       <div class="my-8" data-controller="previews">
-        <%= f.label :images %><br>
+        <%= f.label :images, class: 'my-1'%><br>
         <%= f.file_field :images,
           direct_upload: true,
           multiple: true,
@@ -61,4 +61,27 @@
       </div>
     <% end %>
   </div>
+
+  <style>
+    input::file-selector-button {
+      background-color: #1D4ED8;
+      color: white;
+      border: 1px solid blue;
+      border-radius: 1rem;
+      padding: .5rem;
+    }
+
+    input[type=file] {
+      border: 2px dashed gray;
+      padding: .5rem;
+      width: 90%;
+      background-color: #E5E7EB;
+      border-radius: .5rem;
+    }
+
+    input[type=file]:hover{
+      cursor: pointer;
+      background-color: #D1D5DB;
+    }
+  </style>
 <% end %>
