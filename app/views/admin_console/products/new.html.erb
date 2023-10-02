@@ -2,60 +2,47 @@
   <div class="z-10 fixed flex items-center top-0 w-screen h-screen bg-opacity-25 bg-black shadow p-1">
     <%= form_with model: @product, url: admin_console_products_path , html: { id: 'new_post', class: 'relative py-4 px-8 mx-auto rounded shadow bg-white w-auto max-w-screen-lg overflow-y-auto max-h-128' } do |f| %>
       <h2 class="text-2xl my-2 antialiased font-medium">New Product</h2>
-      <div class="flex justify-around">
-        <div class="mr-5">
-          <div class="my-8">
-            <%= f.label :name %><br />
-            <%= f.text_field :name , class: 'w-64 rounded'%>
-          </div>
+      <div>
+        <%= f.label :name %><br />
+        <%= f.text_field :name , class: 'w-full border-gray-700 border-0 border-b-2 bg-gray-50'%>
+      </div>
 
+      <div class="flex justify-between" data-controller="products">
+        <div>
           <div class="my-8">
             <%= f.label :price %><br />
-            <%= f.text_field :price, class: 'w-64 rounded'%>
+            <%= f.number_field :price, step: :any, class: 'w-64 border-gray-700 border-0 border-b bg-gray-50'%>
           </div>
 
-          <div class="my-8">
-            <%= f.label :sizes %><br />
-            <%= f.text_field :sizes, class: 'w-64 rounded' %>
+          <div class="my-8 w-64">
+            <label>Sizes</label><br/>
+            <div data-products-target="sizesContainer" class="my-1"></div>
+            <button class="bg-gray-100 p-1 border m-1 rounded hover:shadow" data-action="click->products#addSize">Add Size</button>
           </div>
         </div>
 
         <div>
-          <div class="my-8" data-controller="previews">
-            <%= f.label :images%><br>
-            <%= f.file_field :images,
-              direct_upload: true,
-              multiple: true,
-              data: { previews_target: 'input', action: 'change->previews#preview' } 
-            %>
-
-            <div id="image-previews" class="grid grid-cols-2 gap-1 max-h-44 overflow-y-auto" data-previews-target="previewContainer"></div>
+          <div class="my-8">
+            <%= f.label :quantity %><br />
+            <%= f.number_field :quantity, class: 'w-64 border-gray-700 border-0 border-b bg-gray-50' %>
           </div>
 
-          <div class="" data-controller="products">
-            <%= f.label :variants %>
-
-            <div class="my-1">
-              <button type="button" class="border p-1 rounded focus:bg-black focus:text-white" value="color" data-action="click->products#selectVariantType">Colors</button>
-              <button type="button" class="border p-1 rounded focus:bg-black focus:text-white" value="image" data-action="click->products#selectVariantType">Images</button>
-            </div>
-
-            <div data-products-target="colorGroup">
-              <input type="color" id="color-field" data-products-target="colorPicker" data-action="change->products#selectColor"><br />
-              <%= f.text_area :variants, class: 'w-64 rounded', data: { products_target: 'colorField' } %>
-            </div>
-
-            <div data-products-target="imageGroup" hidden="false" data-controller="previews">
-              <%= f.file_field :image_variants,
-                direct_upload: true,
-                multiple: true,
-                data: { previews_target: 'input', action: 'change->previews#preview' }
-              %>
-
-              <div class="grid grid-cols-2 gap-1 max-h-44 overflow-y-auto" data-previews-target="previewContainer"></div>
-            </div>
+          <div class="my-8">
+            <%= f.label :category_id %><br />
+            <%= collection_select(:product, :category_id, Category.all, :id, :name, {prompt: true}, {class: 'w-full border-0 border-b bg-gray-50'})%>
           </div>
         </div>
+      </div>
+      
+      <div class="my-8" data-controller="previews">
+        <%= f.label :images, class: 'my-1'%><br>
+        <%= f.file_field :images,
+          direct_upload: true,
+          multiple: true,
+          data: { previews_target: 'input', action: 'change->previews#preview' }
+        %>
+
+        <div id="image-previews" class="grid grid-cols-2 gap-1 max-h-44 overflow-y-auto" data-previews-target="previewContainer"></div>
       </div>
 
       <div class="field">
@@ -74,4 +61,27 @@
       </div>
     <% end %>
   </div>
+
+  <style>
+    input::file-selector-button {
+      background-color: #1D4ED8;
+      color: white;
+      border: 1px solid blue;
+      border-radius: 1rem;
+      padding: .5rem;
+    }
+
+    input[type=file] {
+      border: 2px dashed gray;
+      padding: .5rem;
+      width: 90%;
+      background-color: #E5E7EB;
+      border-radius: .5rem;
+    }
+
+    input[type=file]:hover{
+      cursor: pointer;
+      background-color: #D1D5DB;
+    }
+  </style>
 <% end %>

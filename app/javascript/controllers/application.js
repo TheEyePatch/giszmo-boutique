@@ -1,5 +1,11 @@
-import { Application } from "@hotwired/stimulus"
+import { Application, defaultSchema } from "@hotwired/stimulus"
 
+const customSchema = {
+    ...defaultSchema,
+    keyMappings: {
+      ...defaultSchema.keyMappings,
+    }
+}
 const application = Application.start()
 
 // Configure Stimulus development experience
