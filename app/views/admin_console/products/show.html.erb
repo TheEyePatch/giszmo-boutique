@@ -14,22 +14,24 @@
       <span class="">PHP <%= @product.price %></span>
     </div>
 
-    <div class="text-lg">
+    <div class="text-lg my-5">
       <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
     </div>
 
-    <div class="text-md">
+    <div class="text-md my-5">
       <h2 class="font-semibold tracking-wide">SIZES:</h2>
       <div class="flex">
         <% @product.sizes.each do |size| %>
-          <div class="border mx-2 p-2 rounded hover:cursor-pointer"><%= size %></div>
+          <div class="border mx-2 p-2 rounded hover:cursor-pointer hover:border-purple-800"><%= size %></div>
         <% end %>
       </div>
     </div>
 
     <div class="p-2 text-md text-justify">
       <h2 class="font-semibold tracking-wide">DETAILS:</h2>
-      <%= @product.detail %>
+      <div class="border rounded p-1">
+        <%= @product.detail %>
+      </div>
     </div>
   </section>
 
