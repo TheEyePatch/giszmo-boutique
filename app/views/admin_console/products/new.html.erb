@@ -1,87 +1,17 @@
 <%= turbo_frame_tag 'modal' do %>
-  <div class="z-10 fixed flex items-center top-0 w-screen h-screen bg-opacity-25 bg-black shadow p-1">
-    <%= form_with model: @product, url: admin_console_products_path , html: { id: 'new_post', class: 'relative py-4 px-8 mx-auto rounded shadow bg-white w-auto max-w-screen-lg overflow-y-auto max-h-128' } do |f| %>
+  <div class="z-10 fixed flex justify-center items-center top-0 w-screen h-screen bg-opacity-25 bg-black shadow p-1">
+    <div class="relative py-4 px-8 mx-auto rounded shadow bg-white w-auto max-w-screen-lg overflow-y-auto max-h-128">
       <h2 class="text-2xl my-2 antialiased font-medium">New Product</h2>
-      <div>
-        <%= f.label :name %><br />
-        <%= f.text_field :name , class: 'w-full border-gray-700 border-0 border-b-2 bg-gray-50'%>
-      </div>
-
-      <div class="flex justify-between" data-controller="products">
-        <div>
-          <div class="my-8">
-            <%= f.label :price %><br />
-            <%= f.number_field :price, step: :any, class: 'w-64 border-gray-700 border-0 border-b bg-gray-50'%>
-          </div>
-
-          <div class="my-8 w-64">
-            <label>Sizes</label><br/>
-            <div data-products-target="sizesContainer" class="my-1"></div>
-            <button class="bg-gray-100 p-1 border m-1 rounded hover:shadow" data-action="click->products#addSize">Add Size</button>
-          </div>
-        </div>
-
-        <div>
-          <div class="my-8">
-            <%= f.label :quantity %><br />
-            <%= f.number_field :quantity, class: 'w-64 border-gray-700 border-0 border-b bg-gray-50' %>
-          </div>
-
-          <div class="my-8">
-            <%= f.label :category_id %><br />
-            <%= collection_select(:product, :category_id, Category.all, :id, :name, {prompt: true}, {class: 'w-full border-0 border-b bg-gray-50'})%>
-          </div>
-        </div>
-      </div>
-      
-      <div class="my-8" data-controller="previews">
-        <%= f.label :images, class: 'my-1'%><br>
-        <%= f.file_field :images,
-          direct_upload: true,
-          multiple: true,
-          data: { previews_target: 'input', action: 'change->previews#preview' }
-        %>
-
-        <div id="image-previews" class="grid grid-cols-2 gap-1 max-h-44 overflow-y-auto" data-previews-target="previewContainer"></div>
-      </div>
-
-      <div class="field">
-        <label>Detail</label><br />
-        <%= f.rich_text_area :detail %>
-      </div>
-      
-      <div class="my-2 flex justify-end">
-        <%= f.submit "Submit", class: 'mx-1 text-white p-2 rounded bg-green-500 w-auto hover:cursor-pointer hover:bg-green-100 hover:text-green-800 border'%>
-
-        <%= button_to 'Cancel', admin_console_products_path, data: {
-          controller: 'modals',
-          action: 'click->modals#close'
-          }, class: 'mx-1 text-white p-2 rounded bg-red-500 w-auto hover:cursor-pointer hover:bg-red-100 hover:text-red-800 border'
-        %>
-      </div>
-    <% end %>
+      <%= render partial: 'form',
+        locals: {product: @product,
+          url: admin_console_products_path,
+          form_id: 'new_product',
+          stimulus: true,
+          cancel_js_controller: 'modals',
+          cancel_js_actions: 'click->modals#close',
+          cancel_path: admin_console_products_path,
+        } 
+      %>
+    </div>
   </div>
-
-  <style>
-    input::file-selector-button {
-      background-color: #1D4ED8;
-      color: white;
-      border: 1px solid blue;
-      border-radius: 1rem;
-      padding: .5rem;
-    }
-
-    input[type=file] {
-      border: 2px dashed gray;
-      padding: .5rem;
-      width: 90%;
-      background-color: #E5E7EB;
-      border-radius: .5rem;
-    }
-
-    input[type=file]:hover{
-      cursor: pointer;
-      background-color: #D1D5DB;
-    }
-  </style>
 <% end %>
