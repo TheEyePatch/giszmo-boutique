@@ -54,7 +54,7 @@ export default class extends Controller {
     
     let image = document.createElement('img')
     image.setAttribute('src', e.currentTarget.src)
-    image.setAttribute('class', 'mx-auto')
+    image.setAttribute('class', 'border mx-auto h-54 max-h-full')
     preview.appendChild(image)
   }
 
