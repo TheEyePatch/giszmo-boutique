@@ -1,5 +1,7 @@
 module AdminConsole
   class ProductsController < AdminController
+    before_action :check_button_action, only: %i[create update]
+
     FORMATTERS = %i[
       turbo_stream
     ].freeze
@@ -71,6 +73,10 @@ module AdminConsole
           render method, locals: locals.merge({ flash: flash })
         end
       end
+    end
+
+    def check_button_action
+      redirect_to request.path if params[:cancel]
     end
   end
 end
