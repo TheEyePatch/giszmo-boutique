@@ -49,7 +49,7 @@ module AdminConsole
     private
 
     def product_params
-      params.require(:product).permit(
+      product_params = params.require(:product).permit(
         :name,
         :price,
         :detail,
@@ -59,6 +59,12 @@ module AdminConsole
         sizes: [],
         images: [],
       )
+
+      if product_params[:images].all?(&:blank?)
+        product_params.except(:images) 
+      else
+        product_params
+      end
     end
 
     def response_formatter(format, type, messages, method, locals)
