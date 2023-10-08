@@ -26,7 +26,6 @@ export default class extends Controller {
 
     preview.innerHTML = ''
     preview.classList.add('border')
-    preview.classList.add('border-black')
 
     for (const file of files) {
       let reader = new FileReader()
@@ -41,7 +40,7 @@ export default class extends Controller {
     const preview = this.previewContainerTarget
     let image = document.createElement('img')
     image.setAttribute('src', reader.result)
-    image.setAttribute('width', 150)
+    // image.setAttribute('width', 150)
     image.setAttribute('class', 'border')
 
     preview.appendChild(image)
