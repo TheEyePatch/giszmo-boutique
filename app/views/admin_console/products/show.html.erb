@@ -36,7 +36,7 @@
   <section class="image-section relative px-4 w-96 mx-5" data-controller="previews">
     <% if @product.images.present? %>
       <div id="main-image" class="relative h-3/5 w-auto my-2" data-previews-target="previewContainer">
-        <%= image_tag @product.images.first, class: 'mx-auto border max-h-full'%>
+        <%= image_tag @product.images.first, class: 'mx-auto h-54 border max-h-full'%>
       </div>
 
       <div class="flex relative rounded overflow-x-hidden border border-grey-100">
@@ -49,7 +49,7 @@
 
         <div class="flex overflow-x-scroll" data-previews-target="imageList">
           <% @product.images.each do |image| %>
-            <%= image_tag image, id: image.id, class: 'w-40 m-1', data: { action: 'click->previews#selectImage' } %>
+            <%= image_tag image, id: image.id, class: 'border h-24 m-1', data: { action: 'click->previews#selectImage' } %>
           <% end %>
         </div>
 
