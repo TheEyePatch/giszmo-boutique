@@ -13,7 +13,15 @@
 
       <div class="my-8 w-64">
         <label>Sizes</label><br/>
-        <div data-products-target="sizesContainer" class="my-1"></div>
+        <div data-products-target="sizesContainer" class="my-1">
+          <% product&.sizes.each do |size| %>
+            <input class="m-1 w-1/3 border-gray-700 border-0 border-b-2 bg-gray-50"
+              type="text"
+              name="product[sizes][]"
+              value="<%= size %>"
+              data-action="keydown->products#removeField">
+          <% end %>
+        </div>
         <button class="bg-gray-100 p-1 border m-1 rounded hover:shadow" data-action="click->products#addSize">Add Size</button>
       </div>
     </div>
