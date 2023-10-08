@@ -52,6 +52,8 @@ export default class extends Controller {
     sizeField.setAttribute('required', 'true')
     sizeField.addEventListener('keydown', (e) => {
       const key = e.code
+      const value = e.currentTarget.value
+      if (value.length > 0) return
       if(key == 'Backspace') sizeField.remove()
     })
     const container = this.sizesContainerTarget;
@@ -59,7 +61,13 @@ export default class extends Controller {
     container.appendChild(sizeField)
   }
 
-  removeField(e) {
-    console.log(e)
+  removeField(e, sizeField) {
+    const key = e.code
+    const value = e.currentTarget.value
+    if (value.length > 0) return
+
+    if(key == 'Backspace' && sizeField) return sizeField.remove()
+
+    if(key == 'Backspace') return e.currentTarget.remove()
   }
 }
