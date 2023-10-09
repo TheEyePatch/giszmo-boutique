@@ -35,37 +35,5 @@
     </div>
   </section>
 
-  <section class="image-section relative px-4 w-96 mx-5" data-controller="previews">
-    <% if @product.images.present? %>
-      <div id="main-image" class="relative h-3/5 w-auto my-2" data-previews-target="previewContainer">
-        <%= image_tag @product.images.first, class: 'mx-auto h-54 border max-h-full'%>
-      </div>
-
-      <div class="flex relative rounded overflow-x-hidden border border-grey-100">
-        <%# LEFT ARROW %>
-        <span class="z-10 text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
-          data-action="click->previews#selectLeftArrow"
-        >
-          <
-        </span>
-
-        <div class="flex overflow-x-scroll" data-previews-target="imageList">
-          <% @product.images.each do |image| %>
-            <%= image_tag image, id: image.id, class: 'border h-24 m-1', data: { action: 'click->previews#selectImage' } %>
-          <% end %>
-        </div>
-
-        <%# RIGHT ARROW %>
-        <span class="z-10 text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
-          data-action="click->previews#selectRightArrow"
-        >
-          >
-        </span>
-      </div>
-    <% else %>
-      <div class="h-96 w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
-        +
-      </div>
-    <% end %>
-  </section>
+  <%= render partial: "partials/image_carousel", locals: { images: @product.images } %>
 </section>
