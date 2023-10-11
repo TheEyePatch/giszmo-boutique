@@ -1,45 +1,11 @@
-<section class="grid mt-16 grid-cols-2 mx-auto text-gray-700">
-  <section class="image-section relative px-4" data-controller="previews">
-    <% if @product.images.present? %>
-      <div id="main-image" class="relative h-3/5 w-auto my-2" data-previews-target="previewContainer">
-        <%= image_tag @product.images.first, class: 'mx-auto border max-h-full'%>
-      </div>
-
-      <div class="flex relative rounded overflow-x-hidden border border-grey-100">
-        <%# LEFT ARROW %>
-        <span class="z-10 text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
-          data-action="click->previews#selectLeftArrow"
-        >
-          <
-        </span>
-
-        <div class="flex overflow-x-scroll" data-previews-target="imageList">
-          <% @product.images.each do |image| %>
-            <%= image_tag image, id: image.id, class: 'w-40 m-1', data: { action: 'click->previews#selectImage' } %>
-          <% end %>
-        </div>
-
-        <%# RIGHT ARROW %>
-        <span class="z-10 text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
-          data-action="click->previews#selectRightArrow"
-        >
-          >
-        </span>
-      </div>
-    <% else %>
-      <div class="h-96 w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
-        +
-      </div>
-    <% end %>
-  </section>
-
-  <section class="meta-data-section w-full pr-6 min-w-128">
+<section class="flex flex-row-reverse mt-16 mx-auto text-gray-700">
+  <section class="meta-data-section mx-5 w-100 min-w-128">
     <div class="flex text-lg justify-between">
       <h1 class="text-4xl font-semibold"><%= @product.name%></h1>
       <%= button_to 'Edit',
         edit_admin_console_product_path(@product),
         method: :get,
-        class: 'bg-blue-700 text-white font-semibold py-1 px-2 text-md rounded-md shadow-md hover:bg-blue-100 hover:text-blue-700 hover:border hover:border-blue-500'
+        class: 'bg-blue-700 text-white font-semibold py-1 px-4 text-md rounded-md shadow-md hover:bg-blue-100 hover:text-blue-700 hover:border hover:border-blue-500'
       %>
     </div>
 
@@ -48,30 +14,26 @@
       <span class="">PHP <%= @product.price %></span>
     </div>
 
-    <div class="text-lg">
+    <div class="text-lg my-5">
       <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
-
-      <div class="flex">
-        <% @product.variants&.split(',')&.each do |variant| %>
-          <div class="border rounded-full w-10 h-10 mx-1" style="background-color:<%= variant%>;"></div>
-        <% end %>
-      </div>
-
-      <div class="flex flex-wrap max-h-50 overflow-y-auto my-5">
-        <% @product.image_variants.each do |image|%>
-          <%= image_tag image, class: 'w-24 m-1 border hover:border-black rounded', data: { action: 'click->previews#selectImage' } %>
-        <% end %>
-      </div>
     </div>
 
-    <div class="p-2 text-md">
+    <div class="text-md my-5">
       <h2 class="font-semibold tracking-wide">SIZES:</h2>
-      <%# TODO: List sizes %>
+      <div class="flex">
+        <% @product.sizes.each do |size| %>
+          <div class="border mx-2 p-2 rounded hover:cursor-pointer hover:border-purple-800"><%= size %></div>
+        <% end %>
+      </div>
     </div>
 
     <div class="p-2 text-md text-justify">
       <h2 class="font-semibold tracking-wide">DETAILS:</h2>
-      <%= @product.detail %>
+      <div class="border rounded p-1">
+        <%= @product.detail %>
+      </div>
     </div>
   </section>
+
+  <%= render partial: "partials/image_carousel", locals: { images: @images } %>
 </section>

@@ -44,6 +44,7 @@ module AdminConsole
 
     def show
       @product = Product.find params[:id]
+      @images = @product.images
     end
 
     private

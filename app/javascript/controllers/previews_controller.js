@@ -12,9 +12,6 @@ export default class extends Controller {
     // console.log(this.previewContainerTarget)
     // console.log(this.imageListTarget)
     this.counter = 1
-    // console.log(this.imageListTarget.firstElementChild)
-    // console.log(this.imageListTarget.firstElementChild.clientWidth)
-    // console.log(this.imageListTarget)
   }
 
   preview(e) {
@@ -54,14 +51,11 @@ export default class extends Controller {
     
     let image = document.createElement('img')
     image.setAttribute('src', e.currentTarget.src)
-    image.setAttribute('class', 'mx-auto')
+    image.setAttribute('class', 'border mx-auto h-54 max-h-full')
     preview.appendChild(image)
   }
 
   selectRightArrow() {
-    // const preview = this.previewContainerTarget
-    // this.imageListTarget.style.transform = `translateX( ${ - this.imageListTarget.firstElementChild.clientWidth * this.counter}px)`
-    // this.counter++
     this.imageListTarget.scrollBy({left: this.imageListTarget.firstElementChild.clientWidth})
   }
 
