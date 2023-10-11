@@ -4,7 +4,6 @@ class Product < ApplicationRecord
   has_many :comments
   has_rich_text :detail
   has_many_attached :images
-  has_many_attached :image_variants
   belongs_to :category
 
   paginates_per 15
