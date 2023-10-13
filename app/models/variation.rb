@@ -1,4 +1,4 @@
 class Variation < ApplicationRecord
   belongs_to :product
-  has_many_attached :images
+  has_one_attached :image, dependent: :destroy
 end
