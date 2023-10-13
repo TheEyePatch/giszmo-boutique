@@ -6,7 +6,8 @@ export default class extends Controller {
     'colorPicker',
     'colorGroup',
     'imageGroup',
-    'sizesContainer'
+    'sizesContainer',
+    'variationContainer'
   ]
 
   connect() {
@@ -69,5 +70,27 @@ export default class extends Controller {
     if(key == 'Backspace' && sizeField) return sizeField.remove()
 
     if(key == 'Backspace') return e.currentTarget.remove()
+  }
+
+  addVariationField(e){
+    e.preventDefault()
+    const nameInput = document.createElement('input')
+    nameInput.setAttribute('type', 'text')
+    nameInput.setAttribute('name', 'product[variations_attributes][][name]')
+    nameInput.setAttribute('placeholder', 'Input name...')
+    nameInput.setAttribute('class', 'border-0 border-b-2 border-black w-72 mr-5 text-base h-14')
+
+    const imageInput = document.createElement('input')
+    imageInput.setAttribute('type', 'file')
+    imageInput.setAttribute('name', 'product[variations_attributes][][image]')
+    imageInput.setAttribute('accept', 'image/png, image/jpeg')
+    // imageInput.setAttribute('class', 'w-60')
+
+    const div = document.createElement('div')
+    div.setAttribute('class', 'm-2 flex items-center justify-around')
+    div.appendChild(nameInput)
+    div.appendChild(imageInput)
+
+    this.variationContainerTarget.appendChild(div)
   }
 }
