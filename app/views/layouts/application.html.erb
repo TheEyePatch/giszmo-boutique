@@ -18,7 +18,7 @@
       <%= yield %>
     </main>
 
-    <% unless request.path.split('/').include?('admin_console')%>
+    <% unless request.path.include?('admin')%>
       <%= render 'partials/footer'%>
     <% end %>
   </body>
