@@ -52,7 +52,19 @@
 
   <div class="input-group my-8" data-controller="products">
     <label>Variations</label><br>
-    <div data-products-target="variationContainer" class="my-1"></div>
+    <div data-products-target="variationContainer" class="my-1">
+      
+      <% if @product.variations.present? %>
+        <% @product.variations.each do |variant| %>
+          <div class="relative m-2 flex items-center justify-around">
+            <%= f.text_field :name, class: 'border-0 border-b-2 border-black mr-5 text-base h-14'  %>
+            <%= f.number_field :price, class: 'border-0 border-b-2 border-black mr-5 text-base h-14' %>
+            <%= f.file_field :image %>
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
     <button type="button" 
       class="border-2 border-dashed rounded border-gray-500 text-gray-800 text-xl bg-gray-100 w-full h-24"
       data-action="click->products#addVariationField" >
@@ -89,7 +101,6 @@
     input[type=file] {
       border: 2px dashed gray;
       padding: .5rem;
-      width: 90%;
       background-color: #E5E7EB;
       border-radius: .5rem;
     }
@@ -102,5 +113,6 @@
 
   .trix-content {
     max-width: 48rem;
+    margin: auto;
   }
   </style>

@@ -78,18 +78,38 @@ export default class extends Controller {
     nameInput.setAttribute('type', 'text')
     nameInput.setAttribute('name', 'product[variations_attributes][][name]')
     nameInput.setAttribute('placeholder', 'Input name...')
-    nameInput.setAttribute('class', 'border-0 border-b-2 border-black w-72 mr-5 text-base h-14')
+    nameInput.setAttribute('class', 'border-0 border-b-2 border-black mr-5 text-base h-14')
 
     const imageInput = document.createElement('input')
     imageInput.setAttribute('type', 'file')
     imageInput.setAttribute('name', 'product[variations_attributes][][image]')
     imageInput.setAttribute('accept', 'image/png, image/jpeg')
-    // imageInput.setAttribute('class', 'w-60')
+    imageInput.setAttribute('class', 'variation-image-input')
 
+    const priceInput = document.createElement('input')
+    priceInput.setAttribute('type', 'number')
+    priceInput.setAttribute('step', 'any')
+    priceInput.setAttribute('name', 'product[variations_attributes][][price]')
+    priceInput.setAttribute('placeholder', 'Input price...')
+    priceInput.setAttribute('class', 'border-0 border-b-2 border-black mr-5 text-base h-14')
+
+    const cancelButton = document.createElement('span')
+    cancelButton.setAttribute('class', 'absolute -top-4 -right-4 ml-2 p-1 flex items-center justify-center rounded-full text-white bg-gray-300 hover:bg-gray-400 shadow hover:cursor-pointer')
+    cancelButton.style.width = '2rem'
+    cancelButton.style.height = '2rem'
+    cancelButton.innerText = 'x'
+  
     const div = document.createElement('div')
-    div.setAttribute('class', 'm-2 flex items-center justify-around')
+    div.setAttribute('class', 'relative m-2 flex items-center justify-around')
     div.appendChild(nameInput)
+    div.appendChild(priceInput)
     div.appendChild(imageInput)
+    div.appendChild(cancelButton)
+    
+
+    cancelButton.addEventListener('click', (e) => {
+      div.remove()
+    })
 
     this.variationContainerTarget.appendChild(div)
   }
