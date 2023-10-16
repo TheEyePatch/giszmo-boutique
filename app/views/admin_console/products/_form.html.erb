@@ -55,13 +55,28 @@
     <div data-products-target="variationContainer" class="my-1">
       
       <% if @product.variations.present? %>
-        <% @product.variations.each do |variant| %>
-          <div class="relative m-2 flex items-center justify-around">
-            <%= f.text_field :name, class: 'border-0 border-b-2 border-black mr-5 text-base h-14'  %>
-            <%= f.number_field :price, class: 'border-0 border-b-2 border-black mr-5 text-base h-14' %>
-            <%= f.file_field :image %>
-          </div>
-        <% end %>
+        <div class="grid grid-cols-4 gap-2">
+
+          <% @product.variations.each do |variant| %>
+            <div class="relative border p-0 rounded">
+              <%if variant.image.attached?%>
+                <%= image_tag variant.image, class: 'h-24 mx-auto'%>
+              <%else%>
+                <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
+                  <h2>Missing Image</h2>
+                </div>
+              <%end%>
+  
+              <h3 class="p-1"><%= variant.name%></h3>
+              <%= link_to 'x',
+                admin_console_variation_path(variant.id),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure? Action cannot be undone once proceeded." },
+                class: 'absolute -top-2 -right-2 bg-red-500 shadow text-white rounded-full flex justify-center items-center w-5 h-5 hover:cursor-pointer hover:bg-red-300 hover:border hover:border-red-500' %>
+            </div>
+          <% end %>
+
+        </div>
+
       <% end %>
 
     </div>
