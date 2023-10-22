@@ -2,7 +2,6 @@ class CreateProducts < ActiveRecord::Migration[7.0]
   def change
     create_table :products do |t|
       t.string :name
-      t.text :sizes, array: true, default: []
       t.boolean :featured
       t.decimal :price, precision: 10, scale: 2
       t.decimal :quantity, precision: 10, scale: 2

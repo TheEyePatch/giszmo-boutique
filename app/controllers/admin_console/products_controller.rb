@@ -55,9 +55,10 @@ module AdminConsole
         :price,
         :detail,
         :quantity,
+        :featured,
         :category_id,
-        sizes: [],
-        variations_attributes: %i[name image],
+        variations_attributes: %i[name image price],
+        sizes_attributes: %i[size price width length height],
         images: [],
       )
 
