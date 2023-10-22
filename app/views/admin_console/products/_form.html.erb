@@ -1,10 +1,10 @@
 <%= form_with model: product, url: url , html: { id: form_id } do |f| %>
-  <div>
+  <div class="input-group">
     <%= f.label :name %><br />
     <%= f.text_field :name , class: 'w-full border-gray-700 border-0 border-b-2 bg-gray-50'%>
   </div>
 
-  <div class="flex justify-between" data-controller="products">
+  <div class="input-group flex justify-between" data-controller="products">
     <div>
       <div class="my-8">
         <%= f.label :price %><br />
@@ -39,7 +39,7 @@
     </div>
   </div>
   
-  <div class="my-8" data-controller="previews">
+  <div class="input-group my-8" data-controller="previews">
     <%= f.label :images, class: 'my-1'%><br>
     <%= f.file_field :images,
       direct_upload: true,
@@ -50,7 +50,46 @@
     <div id="image-previews" class="grid grid-cols-2 gap-1 w-96 overflow-y-auto" data-previews-target="previewContainer"></div>
   </div>
 
-  <div class="field">
+  <div class="input-group my-8" data-controller="products">
+    <label>Variations</label><br>
+    <div data-products-target="variationContainer" class="my-1">
+      
+      <% if @product.variations.present? %>
+        <div class="grid grid-cols-4 gap-2">
+
+          <% @product.variations.each do |variant| %>
+            <div class="relative border p-0 rounded">
+              <%if variant.image.attached?%>
+                <%= image_tag variant.image, class: 'h-24 mx-auto'%>
+              <%else%>
+                <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
+                  <h2>Missing Image</h2>
+                </div>
+              <%end%>
+  
+              <h3 class="p-1"><%= variant.name%></h3>
+              <%= link_to 'x',
+                admin_console_variation_path(variant.id),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure? Action cannot be undone once proceeded." },
+                class: 'absolute -top-2 -right-2 bg-red-500 shadow text-white rounded-full flex justify-center items-center w-5 h-5 hover:cursor-pointer hover:bg-red-300 hover:border hover:border-red-500' %>
+            </div>
+          <% end %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+    <button type="button" 
+      class="border-2 border-dashed rounded border-gray-500 text-gray-800 text-xl bg-gray-100 w-full h-24"
+      data-action="click->products#addVariationField" >
+      Add Variation
+    </button>
+
+    <br>
+  </div>
+
+  <div class="input-group field">
     <label>Detail</label><br />
     <%= f.rich_text_area :detail %>
   </div>
@@ -77,7 +116,6 @@
     input[type=file] {
       border: 2px dashed gray;
       padding: .5rem;
-      width: 90%;
       background-color: #E5E7EB;
       border-radius: .5rem;
     }
@@ -86,4 +124,10 @@
       cursor: pointer;
       background-color: #D1D5DB;
     }
+
+
+  .trix-content {
+    max-width: 48rem;
+    margin: auto;
+  }
   </style>

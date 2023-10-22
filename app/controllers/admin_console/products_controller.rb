@@ -56,8 +56,8 @@ module AdminConsole
         :detail,
         :quantity,
         :category_id,
-        variants: [],
         sizes: [],
+        variations_attributes: %i[name image],
         images: [],
       )
 

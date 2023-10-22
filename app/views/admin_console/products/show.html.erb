@@ -16,6 +16,21 @@
 
     <div class="text-lg my-5">
       <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
+      <div class="grid grid-cols-4 gap-2">
+        <% @product.variations.each do |variant|%>
+          <div class="border p-0">
+            <%if variant.image.attached?%>
+              <%= image_tag variant.image, class: 'h-24 mx-auto'%>
+            <%else%>
+              <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
+                <h2>Missing Image</h2>
+              </div>
+            <%end%>
+
+            <h3 class="p-1"><%= variant.name%></h3>
+          </div>
+        <%end%>
+      </div>
     </div>
 
     <div class="text-md my-5">
