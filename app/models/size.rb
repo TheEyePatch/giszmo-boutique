@@ -1,4 +1,4 @@
 class Size < ApplicationRecord
-  belongs_to :product
-  validates :size, uniqueness: { scope: :product, message: 'should be unique per product' }
+  belongs_to :sizable, polymorphic: true
+  validates :size, uniqueness: { scope: :sizable, message: 'should be unique per product' }
 end

@@ -52,13 +52,14 @@ module AdminConsole
     def product_params
       product_params = params.require(:product).permit(
         :name,
-        :price,
         :detail,
-        :quantity,
         :featured,
         :category_id,
-        variations_attributes: %i[name image price],
-        sizes_attributes: %i[size price width length height],
+        variations_attributes: [
+          :name,
+          :image,
+          sizes_attributes: %i[size price length width height]
+        ],
         images: [],
       )
 
