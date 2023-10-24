@@ -58,7 +58,7 @@ module AdminConsole
         variations_attributes: [
           :name,
           :image,
-          sizes_attributes: %i[size price length width height]
+          sizes_attributes: %i[size price weight quantity length width height],
         ],
         images: [],
       )

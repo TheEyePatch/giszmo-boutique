@@ -22,7 +22,6 @@ export default class extends Controller {
     imageInput.setAttribute('accept', 'image/png, image/jpeg')
     imageInput.setAttribute('class', 'variation-image-input')
 
-    this.variationCounter += 1
     const sizeContainer = this.createFieldContainer('', `sizeContainer${this.variationCounter}`)
     sizeContainer.setAttribute('id', `sizeContainer${this.variationCounter}`)
 
@@ -43,6 +42,7 @@ export default class extends Controller {
     })
 
     this.variationContainerTarget.appendChild(variationContainer)
+    this.variationCounter += 1
   }
   
   addSizeFields(e) {
@@ -51,14 +51,18 @@ export default class extends Controller {
     const sizeField = this.createField('text', 'Size', 'product[variations_attributes][][sizes_attributes][][size]')
     sizeField.setAttribute('required', 'true')
 
-    const priceField = this.createField('number', 'Price', 'product[variations_attributes][][sizes_attributes][][price]')
-    const mainDetails = this.createFieldContainer('flex m-1')
+    const priceField = this.createField('number', 'Price (Php)', 'product[variations_attributes][][sizes_attributes][][price]')
+    const weightField = this.createField('number', 'Weight (Kg)', 'product[variations_attributes][][sizes_attributes][][weight]')
+    const quantityField = this.createField('number', 'Quantity', 'product[variations_attributes][][sizes_attributes][][quantity]')
+    const mainDetails = this.createFieldContainer('grid grid-cols-2 gap-1 m-1')
     mainDetails.appendChild(sizeField)
     mainDetails.appendChild(priceField)
+    mainDetails.appendChild(weightField)
+    mainDetails.appendChild(quantityField)
 
-    const widthField = this.createField('number', 'Width', 'product[variations_attributes][][sizes_attributes][][width]')
-    const lengthField = this.createField('number', 'Length', 'product[variations_attributes][][sizes_attributes][][length]')
-    const heightField = this.createField('number', 'Height', 'product[variations_attributes][][sizes_attributes][][height]')
+    const widthField = this.createField('number', 'Width (cm)', 'product[variations_attributes][][sizes_attributes][][width]')
+    const lengthField = this.createField('number', 'Length (cm)', 'product[variations_attributes][][sizes_attributes][][length]')
+    const heightField = this.createField('number', 'Height (cm)', 'product[variations_attributes][][sizes_attributes][][height]')
   
     const dimensions = this.createFieldContainer('flex m-1')
     dimensions.appendChild(lengthField)
