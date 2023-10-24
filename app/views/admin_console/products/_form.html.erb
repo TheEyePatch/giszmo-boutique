@@ -4,38 +4,15 @@
     <%= f.text_field :name , class: 'w-full border-gray-700 border-0 border-b-2 bg-gray-50'%>
   </div>
 
-  <div class="input-group flex justify-between" data-controller="products">
-    <div>
-      <div class="my-8">
-        <%= f.label :price %><br />
-        <%= f.number_field :price, step: :any, class: 'w-64 border-gray-700 border-0 border-b bg-gray-50'%>
-      </div>
-
-      <div class="my-8 w-64">
-        <label>Sizes</label><br/>
-        <div data-products-target="sizesContainer" class="my-1">
-          <% product&.sizes.each do |size| %>
-            <input class="m-1 w-1/3 border-gray-700 border-0 border-b-2 bg-gray-50"
-              type="text"
-              name="product[sizes][]"
-              value="<%= size %>"
-              data-action="keydown->products#removeField">
-          <% end %>
-        </div>
-        <button class="bg-gray-100 p-1 border m-1 rounded hover:shadow" data-action="click->products#addSize">Add Size</button>
-      </div>
+  <div class="input-group flex" data-controller="products">
+    <div class="my-8">
+      <%= f.label :category_id %><br />
+      <%= collection_select(:product, :category_id, Category.all, :id, :name, {prompt: true}, {class: 'w-full border-0 border-b bg-gray-50'})%>
     </div>
 
-    <div>
-      <div class="my-8">
-        <%= f.label :quantity %><br />
-        <%= f.number_field :quantity, class: 'w-64 border-gray-700 border-0 border-b bg-gray-50' %>
-      </div>
-
-      <div class="my-8">
-        <%= f.label :category_id %><br />
-        <%= collection_select(:product, :category_id, Category.all, :id, :name, {prompt: true}, {class: 'w-full border-0 border-b bg-gray-50'})%>
-      </div>
+    <div class="my-8 mx-5 flex items-center">
+      <%= f.check_box :featured %>
+      <%= f.label :featured, class: 'mx-1 hover:cursor-pointer' %>
     </div>
   </div>
   
@@ -50,10 +27,15 @@
     <div id="image-previews" class="grid grid-cols-2 gap-1 w-96 overflow-y-auto" data-previews-target="previewContainer"></div>
   </div>
 
-  <div class="input-group my-8" data-controller="products">
+  <div class="input-group field">
+    <label>Detail</label><br />
+    <%= f.rich_text_area :detail %>
+  </div>
+
+  <div class="input-group my-8" data-controller="variation">
     <label>Variations</label><br>
-    <div data-products-target="variationContainer" class="my-1">
-      
+    <div data-variation-target="variationContainer" class="my-1">
+
       <% if @product.variations.present? %>
         <div class="grid grid-cols-4 gap-2">
 
@@ -76,22 +58,16 @@
           <% end %>
 
         </div>
-
       <% end %>
 
     </div>
     <button type="button" 
       class="border-2 border-dashed rounded border-gray-500 text-gray-800 text-xl bg-gray-100 w-full h-24"
-      data-action="click->products#addVariationField" >
+      data-action="click->variation#addVariationField" >
       Add Variation
     </button>
 
     <br>
-  </div>
-
-  <div class="input-group field">
-    <label>Detail</label><br />
-    <%= f.rich_text_area :detail %>
   </div>
   
   <div class="my-2 flex justify-end">
