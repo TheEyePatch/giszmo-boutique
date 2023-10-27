@@ -11,7 +11,7 @@
 
     <div class="mt-1">
       <span class="font-semibold tracking-wide">PRICE:</span>
-      <span class="">PHP <%= @product.price %></span>
+      <span class=""><%= @price_range %></span>
     </div>
 
     <% if @product.variations.exists? %>
@@ -33,15 +33,6 @@
           <%end%>
         </div>
       <%end%>
-    </div>
-
-    <div class="text-md my-5">
-      <h2 class="font-semibold tracking-wide">SIZES:</h2>
-      <div class="flex">
-        <% @product.sizes.each do |size| %>
-          <div class="border mx-2 p-2 rounded hover:cursor-pointer hover:border-purple-800"><%= size.size %></div>
-        <% end %>
-      </div>
     </div>
 
     <div class="p-2 text-md text-justify">
