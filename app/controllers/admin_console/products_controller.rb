@@ -44,7 +44,7 @@ module AdminConsole
 
     def show
       @product = Product.includes(variations: %i[image_attachment sizes]).find params[:id]
-      @price_range = @product.sizes.pluck(:price).minmax.map { |price| "PHP #{price}" }.join(' - ')
+      @price_range = @product.sizes.pluck(:price).minmax.uniq.map { |price| "PHP #{price}" }.join(' - ')
       @images = @product.images
     end
 

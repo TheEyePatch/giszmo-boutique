@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [
     'variationContainer',
-    'sizesContainer'
+    'sizesContainer',
   ]
 
   connect() {
@@ -81,8 +81,6 @@ export default class extends Controller {
     cancelButton.addEventListener('click', (e) => div.remove())
 
     div.appendChild(cancelButton)
-    console.log(e.currentTarget.dataset)
-    console.log(e)
     const container = document.getElementById(`sizeContainer${e.currentTarget.dataset.sizeButtonIndex}`)
     container.appendChild(div)
 
@@ -133,5 +131,14 @@ export default class extends Controller {
     if(id)  div.setAttribute('id', id)
 
     return div
+  }
+
+  // SHOW
+
+  selectVariation(e) {
+    this.sizesContainerTarget.innerHTML = ''
+    this.sizesContainerTarget.setAttribute('class', 'flex border p-1')
+    
+    console.log(e.currentTarget.dataset.sizes)
   }
 }
