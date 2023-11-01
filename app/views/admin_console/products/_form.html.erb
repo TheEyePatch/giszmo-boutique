@@ -32,9 +32,9 @@
     <%= f.rich_text_area :detail %>
   </div>
 
-  <div class="input-group my-8" data-controller="variation">
+  <div class="input-group my-8" data-controller="variations--forms">
     <label>Variations</label><br>
-    <div data-variation-target="variationContainer" class="my-1">
+    <div data-variations--forms-target="variationContainer" class="my-1">
       <table class="w-full border">
         <tr class="bg-gray-100">
           <th class="border">Name</th>
@@ -48,17 +48,17 @@
             <td class="p-1 flex justify-center">
               <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded' %>
               <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded' %>
-              <a href="" data-id="<%= variant.id%>"  data-action="click->variation#batchDelete">Remove</a>
+              <a href="" data-id="<%= variant.id%>"  data-action="click->variations--forms#batchDelete">Remove</a>
             </td>
           </tr>
         <%end%>
       </table>
 
-      <div display="hidden" data-variation-target="variationIds"></div>
+      <div display="hidden" data-variations--forms-target="variationIds"></div>
     </div>
     <button type="button" 
       class="border-2 border-dashed rounded border-gray-500 text-gray-800 text-xl bg-gray-100 w-full h-24"
-      data-action="click->variation#addVariationField" >
+      data-action="click->variations--forms#addVariationField" >
       Add Variation
     </button>
 
@@ -67,8 +67,8 @@
   
   <div class="my-2 flex justify-end">
     <%= f.submit "Submit", class: 'mx-1 text-white p-2 rounded bg-green-500 w-auto hover:cursor-pointer hover:bg-green-100 hover:text-green-800 border'%>
-    <%= button_to 'Cancel', cancel_path, name: 'cancel', value: true,
-      data: stimulus ? { controller: cancel_js_controller, action: cancel_js_actions } : {}, 
+    <%= link_to 'Cancel', cancel_path, name: 'cancel', value: true,
+      data: stimulus ? { controller: cancel_js_controller, action: cancel_js_actions } : {},
       class: 'mx-1 text-white p-2 rounded bg-red-500 w-auto hover:cursor-pointer hover:bg-red-100 hover:text-red-800 border'
     %>
   </div>

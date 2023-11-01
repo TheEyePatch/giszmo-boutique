@@ -27,7 +27,7 @@ export default class extends Controller {
     sizeContainer.setAttribute('id', `sizeContainer${this.variationCounter}`)
 
     sizeButton.innerText = 'Add Size'
-    sizeButton.setAttribute('data-action', 'click->variation#addSizeFields')
+    sizeButton.setAttribute('data-action', 'click->variations--forms#addSizeFields')
     sizeButton.setAttribute('data-size-button-index', this.variationCounter)
     sizeButton.setAttribute('class', 'bg-gray-100 p-1 border m-1 rounded hover:shadow')
 
@@ -84,8 +84,6 @@ export default class extends Controller {
     div.appendChild(cancelButton)
     const container = document.getElementById(`sizeContainer${e.currentTarget.dataset.sizeButtonIndex}`)
     container.appendChild(div)
-
-    console.log(this.data.get('index'))
   }
 
   createField(type, placeholder = '', name) {
