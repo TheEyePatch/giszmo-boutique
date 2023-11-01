@@ -1,6 +1,7 @@
 module AdminConsole
   class ProductsController < AdminController
     before_action :check_button_action, only: %i[create update]
+    after_action :remove_variations, only: %i[update]
 
     FORMATTERS = %i[
       turbo_stream
@@ -44,7 +45,7 @@ module AdminConsole
 
     def show
       @product = Product.includes(variations: %i[image_attachment sizes]).find params[:id]
-      @price_range = @product.sizes.pluck(:price).minmax.uniq.map { |price| "PHP #{price}" }.join(' - ')
+      @price_range = @product.sizes.pluck(:price).minmax.uniq
       @images = @product.images
     end
 
@@ -57,6 +58,7 @@ module AdminConsole
         :featured,
         :category_id,
         variations_attributes: [
+          :id,
           :name,
           :image,
           sizes_attributes: %i[size price weight quantity length width height],
@@ -87,6 +89,10 @@ module AdminConsole
 
     def check_button_action
       redirect_to request.path if params[:cancel]
+    end
+
+    def remove_variations
+      Variation.where(id: params[:variation_ids]).destroy_all
     end
   end
 end

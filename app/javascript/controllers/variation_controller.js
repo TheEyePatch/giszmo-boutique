@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = [
     'variationContainer',
     'sizesContainer',
+    'variationIds'
   ]
 
   connect() {
@@ -131,6 +132,29 @@ export default class extends Controller {
     if(id)  div.setAttribute('id', id)
 
     return div
+  }
+
+  batchDelete(e) {
+    e.preventDefault()
+    const element = e.currentTarget
+    const id = element.dataset.id
+
+    if(!element.dataset.removed) {
+      let variationIdForm = document.createElement('input')
+      variationIdForm.setAttribute('name', 'variation_ids[]')
+      variationIdForm.setAttribute('hidden', 'true')
+      variationIdForm.setAttribute('id', id)
+      variationIdForm.setAttribute('value', id)
+
+      this.variationIdsTarget.appendChild(variationIdForm)
+      element.dataset.removed = true
+      element.innerText = 'Undo'
+    } else {
+      let variationIdForm = document.getElementById(id)
+      variationIdForm.remove()
+      delete element.dataset.removed
+      element.innerText = 'Remove'
+    }
   }
 
   // SHOW
