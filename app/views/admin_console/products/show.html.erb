@@ -1,5 +1,9 @@
-<section class="flex flex-row-reverse mt-16 mx-auto text-gray-700">
-  <section class="meta-data-section mx-5 w-100 min-w-128">
+<section class="flex relative flex-row-reverse mt-16 mx-auto text-gray-700">
+  <div class="absolute left-0 w-full z-20">
+    <%= render partial: 'partials/flash_messages'%>
+  </div>
+
+  <section class="meta-data-section mx-5 w-100 min-w-128" data-controller="products--admin-show">
     <div class="flex text-lg justify-between">
       <h1 class="text-4xl font-semibold"><%= @product.name%></h1>
       <%= button_to 'Edit',
@@ -11,27 +15,35 @@
 
     <div class="mt-1">
       <span class="font-semibold tracking-wide">PRICE:</span>
-      <span class=""><%= @price_range %></span>
+      <span class="" data-products--admin-show-target="priceContainer"><%= @price_range.map { |price| number_to_currency(price, unit: 'PHP') }.join(' - ') %></span>
     </div>
 
     <% if @product.variations.exists? %>
+
       <div class="text-lg my-5">
         <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
         <div class="grid grid-cols-4 gap-2">
           <% @product.variations.each do |variant|%>
-            <div class="border p-0 rounded">
-              <%if variant.image.attached?%>
-                <%= image_tag variant.image, class: 'h-24 mx-auto'%>
-              <%else%>
-                <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
-                  <h2>Missing Image</h2>
-                </div>
-              <%end%>
 
-              <h3 class="p-1"><%= variant.name%></h3>
-            </div>
+            <%= link_to variation_images_admin_console_product_variation_path(@product, variant), data: { turbo_frame: 'image_carousel' } do %>
+              <div class="border p-0 rounded hover:cursor-pointer hover:border-blue-200 hover:border-2 hover:-my-1"
+                data-price-range="<%= variant.sizes.pluck(:price).uniq.minmax.map { |price| number_to_currency(price, unit: 'PHP') }.join(' - ') %>"
+                data-action="click->products--admin-show#setPriceRange">
+                <%if variant.image.attached?%>
+                  <%= image_tag variant.image, class: 'h-24 mx-auto'%>
+                <%else%>
+                  <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
+                    <h2>Missing Image</h2>
+                  </div>
+                <%end%>
+
+                <h3 class="p-1"><%= variant.name%></h3>
+              </div>
+            <%end%>
+
           <%end%>
         </div>
+
       <%end%>
     </div>
 
@@ -43,5 +55,7 @@
     </div>
   </section>
 
-  <%= render partial: "partials/image_carousel", locals: { images: @images } %>
+  <%= turbo_frame_tag 'image_carousel' do %>
+    <%= render partial: "partials/image_carousel", locals: { images: @images } %>
+  <%end%>
 </section>

@@ -1,6 +1,12 @@
 module AdminConsole
   class VariationsController < AdminController
-    def index; end
+    def show
+      @variation = variation
+    end
+
+    def edit
+      @varition = variation
+    end
 
     def destroy
       return if variation.blank?
@@ -14,10 +20,18 @@ module AdminConsole
       end
     end
 
+    def variation_images
+      @image = variation.image.attached ? variation.image : nil
+    end
+
     private
 
     def variation
-      @variation ||= Variation.find(params[:id])
+      @variation ||= product.variations.find(params[:id])
+    end
+
+    def product
+      @product ||= Product.find params[:product_id]
     end
   end
 end

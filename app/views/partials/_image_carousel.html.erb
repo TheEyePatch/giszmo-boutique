@@ -1,5 +1,5 @@
 <section class="image-section relative px-4 w-100 mx-5" data-controller="previews">
-  <% if images.present? %>
+  <% if images.compact.present? %>
     <div id="main-image" class="relative h-96 w-auto my-2 flex items-end" data-previews-target="previewContainer">
       <%= image_tag images.first, class: 'mx-auto max-h-full'%>
     </div>
