@@ -1,0 +1,10 @@
+<ul class="flex">
+  <% sizes&.each do |size| %>
+    <li class="border p-1 m-1 rounded hover:cursor-pointer hover:border-blue-200"><%= size.size%></li>
+    <%end%>
+</ul>
+
+<div>
+  <h1>Quantity</h1>
+  <%= sizes.pluck :size%>
+</div>

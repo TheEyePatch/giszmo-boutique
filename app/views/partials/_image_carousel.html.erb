@@ -4,7 +4,7 @@
       <%= image_tag images.first, class: 'mx-auto max-h-full'%>
     </div>
 
-    <div class="flex relative rounded border border-grey-100">
+    <div class="flex relative">
       <div class="gallery w-full flex overflow-x-scroll px-2" data-previews-target="imageList">
         <% images.each do |image| %>
           <%= image_tag image, id: image.id, class: 'border h-24 m-1', data: { action: 'click->previews#selectImage' } %>
@@ -21,8 +21,10 @@
       > > </button>
     </div>
   <% else %>
-    <div class="h-96 w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
-      +
+    <div id="main-image" class="relative h-96 w-auto my-2 flex items-end">
+      <div class="h-full w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
+        +
+      </div>
     </div>
   <% end %>
 </section>

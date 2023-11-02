@@ -12,4 +12,18 @@ export default class extends Controller {
   setPriceRange(e) {
     this.priceContainerTarget.innerText = e.currentTarget.dataset.priceRange
   }
+
+  selectImageVariant(e) {
+    // e.preventDefault()
+    if(!e.currentTarget.querySelector('img')) return
+
+    const image = e.currentTarget.querySelector('img').cloneNode(true)
+    image.setAttribute('class', 'mx-auto max-h-full')
+    const imageContainer = document.getElementById('main-image')
+
+    imageContainer.innerHTML = ''
+    imageContainer.appendChild(image)
+  }
+
+
 }

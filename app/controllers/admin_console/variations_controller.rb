@@ -20,10 +20,6 @@ module AdminConsole
       end
     end
 
-    def variation_images
-      @image = variation.image.attached ? variation.image : nil
-    end
-
     private
 
     def variation
