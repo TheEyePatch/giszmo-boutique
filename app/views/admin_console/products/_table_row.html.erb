@@ -3,7 +3,7 @@
     <%= button_to product.name, admin_console_product_path(product), class: 'text-left p-4 h-full w-full', method: :get%>
   </td>
   <td class="p-4 max-w-sm">
-    <%= button_to product.price, admin_console_product_path(product), class: 'text-left p-4 h-full w-full', method: :get%>
+    <%= button_to product_price_range(product.sizes), admin_console_product_path(product), class: 'text-left p-4 h-full w-full', method: :get%>
   </td>
   <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
   <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>

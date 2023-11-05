@@ -21,6 +21,7 @@
     <%= f.file_field :images,
       direct_upload: true,
       multiple: true,
+      required: true,
       data: { previews_target: 'input', action: 'change->previews#preview' }
     %>
 
