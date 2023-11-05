@@ -15,7 +15,7 @@
 
     <div class="mt-1">
       <span class="font-semibold tracking-wide">PRICE:</span>
-      <span class="" data-products--admin-show-target="priceContainer"><%= @price_range.map { |price| number_to_currency(price, unit: 'PHP') }.join(' - ') %></span>
+      <span class="" data-products--admin-show-target="priceContainer"><%= product_price_range(@product.sizes) %></span>
     </div>
 
     <% if @product.variations.exists? %>
