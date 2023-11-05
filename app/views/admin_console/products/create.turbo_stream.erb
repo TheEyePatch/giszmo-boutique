@@ -13,7 +13,7 @@
   <% end %>
 
 <% elsif flash.present? %>
-  <%= turbo_stream.prepend 'new_post' do %>
+  <%= turbo_stream.prepend 'new_product' do %>
     <div class='absolute top-0'>
       <%= render partial: 'partials/flash_messages'%>
     </div>

@@ -4,7 +4,7 @@
     <%= f.text_field :name , class: 'w-full border-gray-700 border-0 border-b-2 bg-gray-50'%>
   </div>
 
-  <div class="input-group flex" data-controller="products">
+  <div class="input-group flex">
     <div class="my-8">
       <%= f.label :category_id %><br />
       <%= collection_select(:product, :category_id, Category.all, :id, :name, {prompt: true}, {class: 'w-full border-0 border-b bg-gray-50'})%>
@@ -32,38 +32,36 @@
     <%= f.rich_text_area :detail %>
   </div>
 
-  <div class="input-group my-8" data-controller="variation">
+  <div class="input-group my-8" data-controller="variations--forms">
     <label>Variations</label><br>
-    <div data-variation-target="variationContainer" class="my-1">
+    <div data-variations--forms-target="variationContainer" class="my-1">
 
       <% if @product.variations.present? %>
-        <div class="grid grid-cols-4 gap-2">
+        <table class="w-full border">
+          <tr class="bg-gray-100">
+            <th class="border">Name</th>
+            <th class="border">Sizes</th>
+            <th class="border">Actions</th>
+          </tr>
+          <% @product.variations.each do |variant|%>
+            <tr class="border">
+              <td class="p-1"><%= variant.name %></td>
+              <td class="p-1"><%= variant.sizes.pluck(:size).join(', ')%></td>
+              <td class="p-1 flex justify-center">
+                <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded' %>
+                <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded' %>
+                <a href="" data-id="<%= variant.id%>"  data-action="click->variations--forms#batchDelete">Remove</a>
+              </td>
+            </tr>
+          <%end%>
+        </table>
+      <%end%>
 
-          <% @product.variations.each do |variant| %>
-            <div class="relative border p-0 rounded">
-              <%if variant.image.attached?%>
-                <%= image_tag variant.image, class: 'h-24 mx-auto'%>
-              <%else%>
-                <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
-                  <h2>Missing Image</h2>
-                </div>
-              <%end%>
-  
-              <h3 class="p-1"><%= variant.name%></h3>
-              <%= link_to 'x',
-                admin_console_variation_path(variant.id),
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure? Action cannot be undone once proceeded." },
-                class: 'absolute -top-2 -right-2 bg-red-500 shadow text-white rounded-full flex justify-center items-center w-5 h-5 hover:cursor-pointer hover:bg-red-300 hover:border hover:border-red-500' %>
-            </div>
-          <% end %>
-
-        </div>
-      <% end %>
-
+      <div display="hidden" data-variations--forms-target="variationIds"></div>
     </div>
     <button type="button" 
       class="border-2 border-dashed rounded border-gray-500 text-gray-800 text-xl bg-gray-100 w-full h-24"
-      data-action="click->variation#addVariationField" >
+      data-action="click->variations--forms#addVariationField" >
       Add Variation
     </button>
 
@@ -72,8 +70,8 @@
   
   <div class="my-2 flex justify-end">
     <%= f.submit "Submit", class: 'mx-1 text-white p-2 rounded bg-green-500 w-auto hover:cursor-pointer hover:bg-green-100 hover:text-green-800 border'%>
-    <%= button_to 'Cancel', cancel_path, name: 'cancel', value: true,
-      data: stimulus ? { controller: cancel_js_controller, action: cancel_js_actions } : {}, 
+    <%= link_to 'Cancel', cancel_path, name: 'cancel', value: true,
+      data: stimulus ? { controller: cancel_js_controller, action: cancel_js_actions } : {},
       class: 'mx-1 text-white p-2 rounded bg-red-500 w-auto hover:cursor-pointer hover:bg-red-100 hover:text-red-800 border'
     %>
   </div>

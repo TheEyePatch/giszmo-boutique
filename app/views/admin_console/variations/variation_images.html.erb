@@ -1,0 +1,4 @@
+<%#binding.pry%>
+<%= turbo_frame_tag 'image_carousel' do %>
+  <%= render partial: "partials/image_carousel", locals: { images: [@image] } %>
+<%end%>

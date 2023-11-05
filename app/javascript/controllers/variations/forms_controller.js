@@ -3,7 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [
     'variationContainer',
-    'sizesContainer'
+    'sizesContainer',
+    'variationIds'
   ]
 
   connect() {
@@ -26,7 +27,7 @@ export default class extends Controller {
     sizeContainer.setAttribute('id', `sizeContainer${this.variationCounter}`)
 
     sizeButton.innerText = 'Add Size'
-    sizeButton.setAttribute('data-action', 'click->variation#addSizeFields')
+    sizeButton.setAttribute('data-action', 'click->variations--forms#addSizeFields')
     sizeButton.setAttribute('data-size-button-index', this.variationCounter)
     sizeButton.setAttribute('class', 'bg-gray-100 p-1 border m-1 rounded hover:shadow')
 
@@ -81,12 +82,8 @@ export default class extends Controller {
     cancelButton.addEventListener('click', (e) => div.remove())
 
     div.appendChild(cancelButton)
-    console.log(e.currentTarget.dataset)
-    console.log(e)
     const container = document.getElementById(`sizeContainer${e.currentTarget.dataset.sizeButtonIndex}`)
     container.appendChild(div)
-
-    console.log(this.data.get('index'))
   }
 
   createField(type, placeholder = '', name) {
@@ -133,5 +130,37 @@ export default class extends Controller {
     if(id)  div.setAttribute('id', id)
 
     return div
+  }
+
+  batchDelete(e) {
+    e.preventDefault()
+    const element = e.currentTarget
+    const id = element.dataset.id
+
+    if(!element.dataset.removed) {
+      let variationIdForm = document.createElement('input')
+      variationIdForm.setAttribute('name', 'variation_ids[]')
+      variationIdForm.setAttribute('hidden', 'true')
+      variationIdForm.setAttribute('id', id)
+      variationIdForm.setAttribute('value', id)
+
+      this.variationIdsTarget.appendChild(variationIdForm)
+      element.dataset.removed = true
+      element.innerText = 'Undo'
+    } else {
+      let variationIdForm = document.getElementById(id)
+      variationIdForm.remove()
+      delete element.dataset.removed
+      element.innerText = 'Remove'
+    }
+  }
+
+  // SHOW
+
+  selectVariation(e) {
+    this.sizesContainerTarget.innerHTML = ''
+    this.sizesContainerTarget.setAttribute('class', 'flex border p-1')
+    
+    console.log(e.currentTarget.dataset.sizes)
   }
 }

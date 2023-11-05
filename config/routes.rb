@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 
   namespace :admin_console, path: '/admin' do
     root 'products#index'
-    resources :products
-    resources :variations, only: %i[index destroy]
+    resources :products do
+      resources :variations
+    end
+
+    resources :sizes
   end
   # Defines the root path route ("/")
   # root "articles#index"

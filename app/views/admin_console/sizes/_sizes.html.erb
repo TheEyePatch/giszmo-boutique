@@ -1,0 +1,29 @@
+<div>
+  <ul class="flex">
+    <% sizes&.each do |size| %>
+      <li class="border p-1 m-1 rounded hover:cursor-pointer hover:border-blue-200"
+        data-action="click->products--admin-show#selectSize"
+        data-quantity="<%= size.quantity %>"
+        data-price-range="<%= number_to_currency(size.price, unit: 'PHP') %>"
+        >
+        <%= size.size%>
+      </li>
+      <%end%>
+  </ul>
+
+  <div class="flex my-2">
+    <h1 class="text-lg font-semibold tracking-wide">Quantity:</h1>
+    <div class="text-lg mx-1 font-semibold"
+      data-products--admin-show-target="quantityContainer">-</div>
+  </div>
+</div>
+
+<style>
+  .active-size {
+    background-color: #FBBF24;
+  }
+
+  .active-variant {
+   border: 1px solid #FBBF24;
+  }
+</style>

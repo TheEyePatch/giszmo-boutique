@@ -1,28 +1,30 @@
-<section class="image-section relative px-4 w-96 mx-5" data-controller="previews">
-  <% if images.present? %>
-    <div id="main-image" class="relative h-3/5 w-auto my-2" data-previews-target="previewContainer">
-      <%= image_tag images.first, class: 'mx-auto h-54 border max-h-full'%>
+<section class="image-section relative px-4 w-100 mx-5" data-controller="previews">
+  <% if images.compact.present? %>
+    <div id="main-image" class="relative h-96 w-auto my-2 flex items-end" data-previews-target="previewContainer">
+      <%= image_tag images.first, class: 'mx-auto max-h-full'%>
     </div>
 
-    <div class="flex relative rounded border border-grey-100">
-      <div class="gallery flex overflow-x-scroll px-2" data-previews-target="imageList">
+    <div class="flex relative">
+      <div class="gallery w-full flex overflow-x-scroll px-2" data-previews-target="imageList">
         <% images.each do |image| %>
           <%= image_tag image, id: image.id, class: 'border h-24 m-1', data: { action: 'click->previews#selectImage' } %>
         <% end %>
       </div>
 
       <%# LEFT ARROW %>
-      <button type="button" class="z-10 text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
+      <button type="button" class="z-10 text-gray-800 absolute p-2 left-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-30 hover:bg-opacity-50"
         data-action="click->previews#selectLeftArrow"
       > < </button>
       <%# RIGHT ARROW %>
-      <button type="button" class="z-10 text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-20 hover:bg-gray-200 bg-opacity-50"
+      <button type="button" class="z-10 text-gray-800 absolute p-2 right-0 text-4xl h-full flex items-center cursor-pointer bg-gray-100 bg-opacity-30 hover:bg-opacity-50"
         data-action="click->previews#selectRightArrow"
       > > </button>
     </div>
   <% else %>
-    <div class="h-96 w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
-      +
+    <div id="main-image" class="relative h-96 w-auto my-2 flex items-end">
+      <div class="h-full w-96 text-white text-4xl mx-auto border font-extrabold bg-gray-200 flex justify-center items-center">
+        +
+      </div>
     </div>
   <% end %>
 </section>
