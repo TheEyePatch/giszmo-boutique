@@ -26,7 +26,7 @@
           <% @product.variations.each do |variant|%>
 
             <%= link_to admin_console_sizes_path(params: { sizable_id: variant.id, sizable_type: 'Variation' }), data: { turbo_frame: 'sizes_section', action: 'click->products--admin-show#selectImageVariant' } do %>
-              <div class="border p-0 rounded hover:cursor-pointer hover:border-blue-200 hover:border-2 hover:-my-1"
+              <div class="border p-0 rounded hover:cursor-pointer hover:border-yellow-400 hover:border-2 hover:-my-1"
                 data-price-range="<%= variant.sizes.pluck(:price).minmax.uniq.map { |price| number_to_currency(price, unit: 'PHP') }.join(' - ') %>"
                 data-action="click->products--admin-show#setPriceRange">
                 <%if variant.image.attached?%>

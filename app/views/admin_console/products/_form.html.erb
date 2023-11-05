@@ -35,24 +35,27 @@
   <div class="input-group my-8" data-controller="variations--forms">
     <label>Variations</label><br>
     <div data-variations--forms-target="variationContainer" class="my-1">
-      <table class="w-full border">
-        <tr class="bg-gray-100">
-          <th class="border">Name</th>
-          <th class="border">Sizes</th>
-          <th class="border">Actions</th>
-        </tr>
-        <% @product.variations.each do |variant|%>
-          <tr class="border">
-            <td class="p-1"><%= variant.name %></td>
-            <td class="p-1"><%= variant.sizes.pluck(:size).join(', ')%></td>
-            <td class="p-1 flex justify-center">
-              <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded' %>
-              <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded' %>
-              <a href="" data-id="<%= variant.id%>"  data-action="click->variations--forms#batchDelete">Remove</a>
-            </td>
+
+      <% if @product.variations.present? %>
+        <table class="w-full border">
+          <tr class="bg-gray-100">
+            <th class="border">Name</th>
+            <th class="border">Sizes</th>
+            <th class="border">Actions</th>
           </tr>
-        <%end%>
-      </table>
+          <% @product.variations.each do |variant|%>
+            <tr class="border">
+              <td class="p-1"><%= variant.name %></td>
+              <td class="p-1"><%= variant.sizes.pluck(:size).join(', ')%></td>
+              <td class="p-1 flex justify-center">
+                <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded' %>
+                <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded' %>
+                <a href="" data-id="<%= variant.id%>"  data-action="click->variations--forms#batchDelete">Remove</a>
+              </td>
+            </tr>
+          <%end%>
+        </table>
+      <%end%>
 
       <div display="hidden" data-variations--forms-target="variationIds"></div>
     </div>
