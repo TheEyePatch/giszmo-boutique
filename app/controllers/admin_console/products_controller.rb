@@ -43,6 +43,17 @@ module AdminConsole
       end
     end
 
+    def destroy
+      @product = Product.find params[:id]
+      @product.destroy if @product.present?
+
+      if @product.destroyed?
+        redirect_to admin_console_products_path, notice: 'OK'
+      else
+        redirect_to admin_console_products_path, alert: @product.errors
+      end
+    end
+
     def show
       @product = Product.includes(variations: %i[image_attachment sizes]).find params[:id]
       @price_range = @product.sizes.pluck(:price).minmax.uniq

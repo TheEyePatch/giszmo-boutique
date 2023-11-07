@@ -1,3 +1,4 @@
+<script src="https://kit.fontawesome.com/da7ccd1607.js" crossorigin="anonymous"></script>
 <section class="container mt-16 relative px-10 w-screen">
   <%= render partial: 'partials/flash_messages'%>
 
@@ -24,7 +25,7 @@
 
     <tbody id="product-table-body">
       <% @products.each do |product| %>
-        <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:cursor-pointer hover:shadow">
+        <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:shadow">
           <td class="max-w-xl w-screen">
             <%= button_to product.name, admin_console_product_path(product), class: 'text-left p-4 h-full w-full', method: :get%>
           </td>
@@ -33,7 +34,16 @@
           </td>
           <td class="p-4 max-w-sm"><%= format_date(product.created_at)%></td>
           <td class="p-4 max-w-sm"><%= format_date(product.updated_at)%></td>
-          <td class="p-4">Action</td>
+          <td class="p-4">
+            <%= link_to edit_admin_console_product_path(product),
+              class: 'bg-blue-400 text-white p-1 m-1 rounded' do %>
+              <i class="fa-regular fa-pen-to-square"></i>
+            <%end%>
+            <%= link_to admin_console_product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure to delete this product?' } ,
+              class: 'bg-red-400 text-white p-1 m-1 rounded' do %>
+              <i class="fa-solid fa-trash"></i>
+            <%end%>
+          </td>
         </tr>
       <% end %>
     </tbody>
