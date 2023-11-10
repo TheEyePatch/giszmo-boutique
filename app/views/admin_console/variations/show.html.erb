@@ -1,0 +1,66 @@
+<section class="container relative m-auto mt-16">
+  <div class="relative flex justify-center items-center -mt-16 my-8 h-screen">
+    <% if @variation.image.present? %>
+      <%= image_tag @variation.image, class: 'block mx-5 h-100' %>
+    <%end%>
+
+    <div class="relative">
+      <h1 class="relative text-5xl font-semibold mx-5"> <%= @variation.name %></h1>
+
+
+      <div class="absolute -bottom-16 left-5 text-2xl">
+        <%= link_to edit_admin_console_product_variation_path(@variation.product_id, @variation),
+          class: 'bg-blue-500 text-white rounded py-1 px-2 mx-1' do %>
+          <i class="fa-regular fa-pen-to-square"></i>
+        <% end %>
+
+        <%= link_to admin_console_product_variation_path(@variation.product_id, @variation),
+          class: 'bg-red-500 text-white rounded py-1 px-2 mx-1',
+          data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container flex justify-center my-8">
+    <table class="w-7/12">
+      <tr class="text-md border rounded-top bg-gray-100">
+        <th class="p-2" rowspan="2">Size</th>
+        <th class="p-2" rowspan="2">Price</th>
+        <th class="p-2" rowspan="2">Quantity</th>
+        <th class="p-2" colspan="3">Dimensions</th>
+        <th class="p-2" rowspan="2">Actions</th>
+      </tr>
+      <tr class="border rounded-top bg-gray-100">
+        <td class="p-2">Length</td>
+        <td class="p-2">Width</td>
+        <td class="p-2">Height</td>
+      </tr>
+
+      <tbody>
+        <% @variation.sizes.each do |size| %>
+          <tr class="border-b border-gray-400 hover:bg-gray-100 hover:cursor-default">
+            <td class="p-2"><%= size.size %></td>
+            <td class="p-2"><%= size.price %></td>
+            <td class="p-2"><%= size.quantity %></td>
+
+            <td class="p-2"><%= size.length %></td>
+            <td class="p-2"><%= size.width %></td>
+            <td class="p-2"><%= size.height %></td>
+
+            <td class="">
+              <%= link_to edit_admin_console_size_path(size) do %>
+                <i class="fa-regular fa-pen-to-square"></i>
+              <% end %>
+
+              <%= link_to admin_console_size_path(size), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</section>
