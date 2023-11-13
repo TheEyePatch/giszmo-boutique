@@ -26,25 +26,33 @@
 
       <div class="text-lg my-5">
         <h2 class="font-semibold tracking-wide">VARIANTS:</h2>
-        <div class="grid grid-cols-4 gap-2">
+        <div class="grid grid-cols-4 gap-2 mt-2">
           <% @product.variations.each do |variant|%>
 
-            <%= link_to admin_console_sizes_path(params: { sizable_id: variant.id, sizable_type: 'Variation' }), data: { turbo_frame: 'sizes_section', action: 'click->products--admin-show#selectImageVariant' } do %>
-              <div class="border p-0 rounded hover:cursor-pointer hover:border-yellow-400 hover:border-2 hover:-my-1"
-                data-price-range="<%= variant.sizes.pluck(:price).minmax.uniq.map { |price| number_to_currency(price, unit: 'PHP') }.join(' - ') %>"
-                data-action="click->products--admin-show#setPriceRange">
-                <%if variant.image.attached?%>
-                  <%= image_tag variant.image, class: 'h-24 mx-auto'%>
-                <%else%>
-                  <div class="flex bg-gray-200 h-24 items-center text-center justify-center text-gray-500">
-                    <h2>Missing Image</h2>
-                  </div>
-                <%end%>
+            <div class="relative rounded hover:cursor-pointer hover:border-yellow-400 hover:border-2 hover:-my-1">
+              <%= link_to admin_console_sizes_path(params: { sizable_id: variant.id, sizable_type: 'Variation' }), 
+                data: { turbo_frame: 'sizes_section', action: 'click->products--admin-show#selectImageVariant' } do %>
+                
+                <div class="variation-item p-0 rounded"
+                  data-price-range="<%= variant.sizes.pluck(:price).minmax.uniq.map { |price| number_to_currency(price, unit: 'PHP') }.join(' - ') %>"
+                  data-action="click->products--admin-show#setPriceRange">
+                  <%if variant.image.attached?%>
+                    <%= image_tag variant.image, class: 'h-24 mx-auto'%>
+                  <%else%>
+                    <div class="flex bg-gray-200 h-24 p-1 items-center text-center justify-center text-gray-500">
+                      <h2>Missing Image</h2>
+                    </div>
+                  <%end%>
 
-                <h3 class="p-1"><%= variant.name%></h3>
-              </div>
-            <%end%>
+                  <h3 class="p-1"><%= variant.name%></h3>
+                </div>
 
+              <%end%>
+
+              <%= link_to admin_console_product_variation_path(@product, variant), class: 'absolute -top-1 right-0 bg-green-600 text-white mx-1 px-1 rounded' do %>
+                <i class="fa-solid fa-eye"></i>
+              <%end%>
+            </div>
           <%end%>
         </div>
 
@@ -59,7 +67,7 @@
       <%end%>
     </div>
 
-    <div class="text-md text-justify">
+    <div class="text-md text-justify my-5">
       <h2 class="font-semibold text-lg tracking-wide">DETAILS:</h2>
       <div class="border rounded p-1">
         <%= @product.detail %>

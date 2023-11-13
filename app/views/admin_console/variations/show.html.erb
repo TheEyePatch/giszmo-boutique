@@ -4,11 +4,14 @@
   <div class="relative flex justify-center items-center h-5/6">
     <% if @variation.image.present? %>
       <%= image_tag @variation.image, class: 'block mx-5 h-100' %>
+    <% else %>
+      <div class="flex text-2xl bg-gray-200 mx-5 h-100 w-96 items-center text-center justify-center text-gray-500">
+        <h2>Missing Image</h2>
+      </div>
     <%end%>
 
     <div class="relative">
-      <h1 class="relative text-5xl font-semibold mx-5"> <%= @variation.name %></h1>
-
+      <h1 class="text-5xl font-semibold mx-5"><%= @variation.name %></h1>
 
       <div class="absolute -bottom-16 left-5 text-2xl">
         <%= link_to edit_admin_console_product_variation_path(@variation.product_id, @variation),
