@@ -1,4 +1,8 @@
-<section class="flex relative flex-row-reverse mt-16 mx-auto text-gray-700">
+<section class="mt-16">
+  <%= render partial: "partials/breadcrumb", locals: {breadcrumbs: @breadcrumb.items}%>
+</section>
+
+<section class="flex relative flex-row-reverse mx-auto text-gray-700">
   <div class="absolute left-0 w-full z-20">
     <%= render partial: 'partials/flash_messages'%>
   </div>

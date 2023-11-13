@@ -16,11 +16,11 @@ module AdminConsole
     end
 
     def edit
-      @product = Product.find params[:id]
+      @product = product
     end
 
     def update
-      @product = Product.find params[:id]
+      @product = product
       if @product.update(product_params)
         redirect_to admin_console_product_path(@product), notice: 'OK'
       else
@@ -84,6 +84,10 @@ module AdminConsole
       end
     end
 
+    def product
+      @product ||= Product.find params[:id]
+    end
+
     def response_formatter(format, type, messages, method, locals)
       FORMATTERS.each do |format_method|
         format.send(format_method) do
@@ -104,6 +108,13 @@ module AdminConsole
 
     def remove_variations
       Variation.where(id: params[:variation_ids]).destroy_all
+    end
+
+    def initialize_breadcrumb
+      super
+
+      breadcrumb.add(product.name, admin_console_product_path(product)) if params[:id]
+      breadcrumb.add('Edit', edit_admin_console_product_path(product)) if action_name == 'edit'
     end
   end
 end

@@ -1,5 +1,7 @@
 <section class="container relative m-auto mt-16">
-  <div class="relative flex justify-center items-center -mt-16 my-8 h-screen">
+  <%= render partial: "partials/breadcrumb", locals: {breadcrumbs: @breadcrumb.items}%>
+
+  <div class="relative flex justify-center items-center h-5/6">
     <% if @variation.image.present? %>
       <%= image_tag @variation.image, class: 'block mx-5 h-100' %>
     <%end%>

@@ -1,5 +1,7 @@
-<section class="mt-20 flex justify-center p-1 w-screen">
-  <div class="max-w-screen-lg">
+<section class="mt-16">
+  <%= render partial: "partials/breadcrumb", locals: {breadcrumbs: @breadcrumb.items}%>
+
+  <div class="flex justify-center p-1">
     <%= render partial: 'form',
       locals: {product: @product,
         url: admin_console_product_path(@product),

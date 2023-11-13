@@ -29,5 +29,12 @@ module AdminConsole
     def product
       @product ||= Product.find params[:product_id]
     end
+
+    def initialize_breadcrumb
+      super
+      breadcrumb.add(product.name, admin_console_product_path(product))
+      breadcrumb.add(variation.name, admin_console_product_variation_path(product, variation)) if params[:id]
+      breadcrumb.add('Edit', edit_admin_console_product_variation_path(product, variation)) if action_name == 'edit'
+    end
   end
 end

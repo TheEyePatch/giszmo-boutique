@@ -1,0 +1,13 @@
+<section class="mt-16 border">
+  <%= render partial: "partials/breadcrumb", locals: {breadcrumbs: @breadcrumb.items}%>
+
+  <%= form_with model: @variation, url: admin_console_product_variation_path(@variation) do |f| %>
+    <div>
+      <%= f.label :name%><br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+    </div>
+  <%end%>
+</section>
