@@ -1,0 +1,20 @@
+<%if variation %>
+  <%= turbo_stream.update 'modal' do %>
+  <% end %>
+
+  <%= turbo_stream.update 'variation-show' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+    <%= render partial: 'variation_show_block', locals: { variation: @variation }%>
+  <%end%>
+<%else%>
+  <%= turbo_stream.update 'modal' do %>
+  <% end %>
+
+  <%= turbo_stream.prepend 'variation-show' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+<%end%>

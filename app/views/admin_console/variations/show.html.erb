@@ -1,0 +1,48 @@
+<section class="container relative m-auto mt-16">
+  <%= render partial: "partials/breadcrumb", locals: {breadcrumbs: @breadcrumb.items}%>
+
+  <%= turbo_frame_tag 'variation-show' do %>
+    <%= render partial: 'variation_show_block', locals: { variation: @variation }%>
+  <%end%>
+
+  <div class="table-container flex justify-center my-8">
+    <table class="w-7/12">
+      <tr class="text-md border rounded-top bg-gray-100">
+        <th class="p-2" rowspan="2">Size</th>
+        <th class="p-2" rowspan="2">Price</th>
+        <th class="p-2" rowspan="2">Quantity</th>
+        <th class="p-2" colspan="3">Dimensions</th>
+        <th class="p-2" rowspan="2">Actions</th>
+      </tr>
+      <tr class="border rounded-top bg-gray-100">
+        <td class="p-2">Length</td>
+        <td class="p-2">Width</td>
+        <td class="p-2">Height</td>
+      </tr>
+
+      <tbody>
+        <% @variation.sizes.each do |size| %>
+          <tr class="border-b border-gray-400 hover:bg-gray-100 hover:cursor-default">
+            <td class="p-2"><%= size.size %></td>
+            <td class="p-2"><%= size.price %></td>
+            <td class="p-2"><%= size.quantity %></td>
+
+            <td class="p-2"><%= size.length %></td>
+            <td class="p-2"><%= size.width %></td>
+            <td class="p-2"><%= size.height %></td>
+
+            <td class="">
+              <%= link_to edit_admin_console_size_path(size) do %>
+                <i class="fa-regular fa-pen-to-square"></i>
+              <% end %>
+
+              <%= link_to admin_console_size_path(size), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</section>

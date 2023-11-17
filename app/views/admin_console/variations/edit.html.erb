@@ -1,0 +1,37 @@
+
+<%= turbo_frame_tag 'modal' do %>
+  <section class="fixed top-0 w-screen h-screen flex items-center justify-center z-30 top-0 bg-gray-500 bg-opacity-20 border">
+    <div class="">
+      <%= form_with model: @variation, url: admin_console_product_variation_path(@variation.product_id, @variation), class: 'bg-white p-10 overflow-y-auto h-100' do |f| %>
+        <div class="text-md">
+          <%= f.label :name%><br/>
+          <%= f.text_field :name, class: 'border-gray-300 w-full text-2xl rounded shadow' %>
+        </div>
+
+        <div data-controller="previews" class="relative my-8 w-96">
+          <h1>Image</h1>
+
+          <%= f.label :image, class: 'relative hover:cursor-pointer' do %>
+            <div class="absolute top-0 text-transparent hover:text-white hover:bg-black hover:bg-opacity-20 w-full h-full flex justify-center items-center">Edit Image</div>
+
+            <div data-previews-target="previewContainer" class="flex justify-center">
+              <%= image_tag @variation.image if @variation.image.attached? %>
+            </div>
+          <%end%>
+
+
+          <%= f.file_field :image, data: { action: 'change->previews#preview' },
+            class: 'absolute hidden bottom-0 w-full'%>
+        </div>
+
+        <div class="my-5 flex justify-end">
+          <%= f.submit "Submit", class: 'mx-1 text-white p-2 rounded bg-green-500 w-auto hover:cursor-pointer hover:bg-green-100 hover:text-green-800 border'%>
+          <%= link_to 'Cancel', admin_console_product_variation_path(@variation.product_id, @variation),
+            data: { controller: 'modals', action: 'click->modals#close' },
+            class: 'mx-1 text-white p-2 rounded bg-red-500 w-auto hover:cursor-pointer hover:bg-red-100 hover:text-red-800 border'
+          %>
+        </div>
+      <%end%>
+    </div>
+  </section>
+<%end%>
