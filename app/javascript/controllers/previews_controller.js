@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="previews"
 export default class extends Controller {
   static targets = [
-    'input',
     'previewContainer',
     'imageList'
   ]
@@ -15,7 +14,7 @@ export default class extends Controller {
   }
 
   preview(e) {
-    const input = this.inputTarget
+    const input = e.currentTarget
     const preview = this.previewContainerTarget
     const files = input.files
 

@@ -21,8 +21,7 @@
     <%= f.file_field :images,
       direct_upload: true,
       multiple: true,
-      required: true,
-      data: { previews_target: 'input', action: 'change->previews#preview' }
+      data: { action: 'change->previews#preview' }
     %>
 
     <div id="image-previews" class="grid grid-cols-2 gap-1 w-96 overflow-y-auto" data-previews-target="previewContainer"></div>
@@ -49,7 +48,7 @@
               <td class="p-1"><%= variant.name %></td>
               <td class="p-1"><%= variant.sizes.pluck(:size).join(', ')%></td>
               <td class="p-1 flex justify-center">
-                <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded' %>
+                <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded', data: {action: 'click->variations--forms#appendPath'}%>
                 <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded' %>
                 <a href="" data-id="<%= variant.id%>"  data-action="click->variations--forms#batchDelete">Remove</a>
               </td>

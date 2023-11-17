@@ -15,7 +15,8 @@
 
       <div class="absolute -bottom-16 left-5 text-2xl">
         <%= link_to edit_admin_console_product_variation_path(@variation.product_id, @variation),
-          class: 'bg-blue-500 text-white rounded py-1 px-2 mx-1' do %>
+          class: 'bg-blue-500 text-white rounded py-1 px-2 mx-1',
+          data: { turbo_frame: 'modal' } do %>
           <i class="fa-regular fa-pen-to-square"></i>
         <% end %>
 
