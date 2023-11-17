@@ -4,4 +4,6 @@ class Variation < ApplicationRecord
   has_one_attached :image, dependent: :destroy
 
   accepts_nested_attributes_for :sizes, allow_destroy: true
+
+  validates :name, presence: true
 end

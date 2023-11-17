@@ -15,7 +15,7 @@
             <div class="absolute top-0 text-transparent hover:text-white hover:bg-black hover:bg-opacity-20 w-full h-full flex justify-center items-center">Edit Image</div>
 
             <div data-previews-target="previewContainer" class="flex justify-center">
-              <%= image_tag @variation.image %>
+              <%= image_tag @variation.image if @variation.image.attached? %>
             </div>
           <%end%>
 
