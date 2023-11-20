@@ -6,7 +6,7 @@
   <%end%>
 
   <div class="table-container flex justify-center my-8">
-    <table class="w-7/12">
+    <table id="sizes-table" class="table w-7/12">
       <tr class="text-md border rounded-top bg-gray-100">
         <th class="p-2" rowspan="2">Size</th>
         <th class="p-2" rowspan="2">Price</th>
@@ -22,7 +22,7 @@
 
       <tbody>
         <% @variation.sizes.each do |size| %>
-          <tr class="border-b border-gray-400 hover:bg-gray-100 hover:cursor-default">
+          <tr id=<%= %"size_#{size.id}"%> class="border-b border-gray-400 hover:bg-gray-100 hover:cursor-default">
             <td class="p-2"><%= size.size %></td>
             <td class="p-2"><%= size.price %></td>
             <td class="p-2"><%= size.quantity %></td>
@@ -32,7 +32,7 @@
             <td class="p-2"><%= size.height %></td>
 
             <td class="">
-              <%= link_to edit_admin_console_size_path(size) do %>
+              <%= link_to edit_admin_console_size_path(size), data: { turbo_frame: 'modal' } do %>
                 <i class="fa-regular fa-pen-to-square"></i>
               <% end %>
 
