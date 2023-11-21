@@ -1,0 +1,11 @@
+<%= turbo_frame_tag 'modal' do %>
+  <div class="flex justify-center items-center fixed top-0 z-30 w-screen h-screen bg-gray-500 bg-opacity-20">
+    <%= render partial: 'form', locals: {
+        size: @size,
+        sizable_id: @sizable_id,
+        sizable_type: @sizable_type,
+        url: admin_console_sizes_path
+      }
+    %>
+  </div>
+<% end %>

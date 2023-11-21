@@ -1,0 +1,10 @@
+<% if size.present? %>
+  <%= turbo_stream.prepend 'size-container' do %>
+    <div class='absolute top-0 left-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+  <%= turbo_stream.remove "size_#{size.id}"%>
+<% else %>
+  <%= %>
+<% end %>

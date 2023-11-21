@@ -1,0 +1,37 @@
+<% if size.present? %>
+  <%= turbo_stream.prepend 'size-container' do %>
+    <div class='absolute top-0 left-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+
+  <%= turbo_stream.update 'modal' do %>
+  <% end %>
+
+  <%= turbo_stream.update "size_#{size.id}" do %>
+    <td class="p-2"><%= size.size %></td>
+    <td class="p-2"><%= size.price %></td>
+    <td class="p-2"><%= size.quantity %></td>
+
+    <td class="p-2"><%= size.length %></td>
+    <td class="p-2"><%= size.width %></td>
+    <td class="p-2"><%= size.height %></td>
+
+    <td class="">
+      <%= link_to edit_admin_console_size_path(size), data: { turbo_frame: 'modal' } do %>
+        <i class="fa-regular fa-pen-to-square"></i>
+      <% end %>
+
+      <%= link_to admin_console_size_path(size), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </td>
+  <% end %>
+
+<% else %>
+  <%= turbo_stream.prepend 'size_form' do %>
+    <div class='absolute top-0 left-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+<% end %>
