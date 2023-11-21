@@ -94,7 +94,7 @@ class AdminConsole::SizesController < AdminController
   private
 
   def size_params
-    params.require(:size).permit(:size, :quantity, :length, :width, :height)
+    params.require(:size).permit(:size, :price, :quantity, :length, :width, :height)
   end
 
   def size
