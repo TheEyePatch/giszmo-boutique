@@ -1,6 +1,13 @@
 <% if size.present? %>
   <%= turbo_stream.update 'modal' do %>
   <% end %>
+
+  <%= turbo_stream.prepend 'size-container' do %>
+    <div class='absolute top-0 left-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+
   <%= turbo_stream.append 'sizes-table-body' do %>
     <tr id=<%= %"size_#{size.id}"%> class="border-b border-gray-400 hover:bg-gray-100 hover:cursor-default">
       <td class="p-2"><%= size.size %></td>
@@ -22,4 +29,10 @@
       </td>
     </tr>
   <% end %>
+<% else %>
+  <%= turbo_stream.prepend 'size_form' do %>
+    <div class='absolute top-0 left-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
 <% end %>

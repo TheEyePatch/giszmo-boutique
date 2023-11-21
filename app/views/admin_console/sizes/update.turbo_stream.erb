@@ -28,5 +28,10 @@
     </td>
   <% end %>
 
-
+<% else %>
+  <%= turbo_stream.prepend 'size_form' do %>
+    <div class='absolute top-0 left-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
 <% end %>

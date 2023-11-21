@@ -1,4 +1,4 @@
-<%= form_with model: size, url: url, class: 'p-10 bg-white shadow rounded' do |f| %>
+<%= form_with model: size, url: url, id: 'size_form', class: 'relative p-10 bg-white shadow rounded' do |f| %>
   <div class="my-5 flex justify-between">
     <div class="hidden">
       <%= f.number_field :sizable_id, value: sizable_id, class: 'hidden'%>

@@ -59,7 +59,7 @@ class AdminConsole::SizesController < AdminController
         end
         format.turbo_stream do
           flash[:alert] = @size.errors.full_messages
-          render :update, locals: { size: @size }
+          render :update, locals: { size: nil }
         end
       end
     end
