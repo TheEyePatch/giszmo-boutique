@@ -1,0 +1,45 @@
+<%= form_with model: size, url: url, class: 'p-10 bg-white shadow rounded' do |f| %>
+  <div class="my-5 flex justify-between">
+    <div class="hidden">
+      <%= f.number_field :sizable_id, value: sizable_id, class: 'hidden'%>
+      <%= f.text_field :sizable_type, value: sizable_type, class: 'hidden'%>
+    </div>
+
+    <div class="">
+      <%= f.label :size %><br/>
+      <%= f.text_field :size%>
+    </div>
+
+    <div>
+      <%= f.label :quantity %><br/>
+      <%= f.number_field :quantity%>
+    </div>
+  </div>
+
+  <h1>Dimensions</h1>
+  <div class="flex my-5">
+    <div class="mx-1">
+      <%= f.label :length %><br/>
+      <%= f.number_field :length, step: 'any'%>
+    </div>
+
+    <div class="mx-1">
+      <%= f.label :width %><br/>
+      <%= f.number_field :width, step: 'any'%>
+    </div>
+
+    <div class="mx-1">
+      <%= f.label :height %><br/>
+      <%= f.number_field :height, step: 'any'%>
+    </div>
+  </div>
+
+  <div data-controller="modals" class="my-5 flex justify-end">
+    <%= f.submit "Submit", disable_with: 'Submiting...',
+      class: 'mx-1 bg-green-400 text-white p-2 rounded shadow hover:bg-green-600 cursor-pointer'
+    %>
+    <%= link_to "Cancel", '', data: { action: 'modals#close' },
+      class: 'mx-1 bg-red-400 text-white p-2 rounded shadow hover:bg-red-600'
+    %>
+  </div>
+<%end%>

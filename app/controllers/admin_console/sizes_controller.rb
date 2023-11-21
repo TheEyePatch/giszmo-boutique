@@ -3,6 +3,38 @@ class AdminConsole::SizesController < AdminController
     @sizes = Size.where(sizable_id: params[:sizable_id], sizable_type: params[:sizable_type])
   end
 
+  def new
+    @size = Size.new
+    @sizable_id = params[:sizable_id]
+    @sizable_type = params[:sizable_type]
+  end
+
+  def create
+    hash = { sizable_id: params.dig(:size, :sizable_id), sizable_type: params.dig(:size, :sizable_type) }
+    @size = Size.new(size_params.merge(hash))
+    if @size.valid? && @size.save
+      respond_to do |format|
+        format.html do
+          redirect_to admin_console_product_variation_path(product, variation), notice: 'Successfully create variation size'
+        end
+        format.turbo_stream do
+          flash.now[:notice] = 'Successfully create variation size'
+          render :create, locals: { size: @size }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          redirect_to admin_console_product_variation_path(product, variation), alert: @size.errors.full_messages
+        end
+        format.turbo_stream do
+          flash.now[:alert] = @size.errors.full_messages
+          render :create, locals: { size: nil }
+        end
+      end
+    end
+  end
+
   def edit
     @size = Size.find params[:id]
   end
