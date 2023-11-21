@@ -33,6 +33,32 @@ class AdminConsole::SizesController < AdminController
     end
   end
 
+  def destroy
+    size.destroy
+
+    if size.destroyed?
+      respond_to do |format|
+        format.html do
+          redirect_to admin_console_product_variation_path(product, variation), notice: 'Successfully deleted size!'
+        end
+        format.turbo_stream do
+          flash[:notice] = 'Successfully deleted size!'
+          render :destroy, locals: { size: size }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html do
+          redirect_to admin_console_product_variation_path(product, variation), alert: size.errors.full_messages
+        end
+        format.turbo_stream do
+          flash[:alert] = size.errors.full_messages
+          render :destroy, locals: { size: nil }
+        end
+      end
+    end
+  end
+
   private
 
   def size_params
