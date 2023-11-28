@@ -8,6 +8,10 @@
     </div>
     <%= render partial: 'variation_show_block', locals: { variation: @variation }%>
   <%end%>
+
+  <%= turbo_stream.update "variation-name-#{variation.id}" do %>
+    <%= variation.name %>
+  <% end %>
 <%else%>
   <%= turbo_stream.update 'modal' do %>
   <% end %>

@@ -45,11 +45,11 @@
           </tr>
           <% @product.variations.each do |variant|%>
             <tr class="border">
-              <td class="p-1"><%= variant.name %></td>
+              <td class="p-1" id=<%= "variation-name-#{variant.id}"%> ><%= variant.name %></td>
               <td class="p-1"><%= variant.sizes.pluck(:size).join(', ')%></td>
               <td class="p-1 flex justify-center">
                 <%= link_to 'Show', admin_console_product_variation_path(@product, variant), class: 'bg-gray-400 mx-1 text-white p-1 rounded', data: {action: 'click->variations--forms#appendPath'}%>
-                <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded' %>
+                <%= link_to 'Edit', edit_admin_console_product_variation_path(@product, variant), class: 'bg-gray-400  mx-1 text-white p-1 rounded', data: { turbo_frame: 'modal' } %>
                 <a href="" data-id="<%= variant.id%>"  data-action="click->variations--forms#batchDelete">Remove</a>
               </td>
             </tr>
