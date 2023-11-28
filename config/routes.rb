@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
 
     resources :sizes
+    
+    resources :admins
   end
   # Defines the root path route ("/")
   # root "articles#index"
