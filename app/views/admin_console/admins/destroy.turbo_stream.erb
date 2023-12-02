@@ -1,0 +1,10 @@
+<% if admin %>
+  <%= turbo_stream.remove "#{dom_id(admin)}-row" do %>
+  <%end%>
+<%else%>
+  <%= turbo_stream.append 'admin-table' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+<%end%>
