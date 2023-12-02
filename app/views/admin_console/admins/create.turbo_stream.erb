@@ -1,0 +1,39 @@
+<% if admin %>
+  <%= turbo_stream.update 'modal' do %>
+  <%end%>
+
+  <%= turbo_stream.append 'admin-table' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+
+  <%= turbo_stream.prepend 'admin-table-body' do %>
+    <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:shadow">
+      <td class="max-w-xl w-screen">
+        <%= button_to admin.email, admin_console_admin_path(admin), class: 'text-left p-4 h-full w-full', method: :get%>
+      </td>
+      <td class="p-1">
+        <%= admin.username%>
+      </td>
+      <td class="p-4 max-w-sm"><%= format_date(admin.created_at)%></td>
+      <td class="p-4 max-w-sm"><%= format_date(admin.updated_at)%></td>
+      <td class="p-4">
+        <%= link_to edit_admin_console_admin_path(admin),
+          class: 'bg-blue-400 text-white p-1 m-1 rounded' do %>
+          <i class="fa-regular fa-pen-to-square"></i>
+        <%end%>
+        <%= link_to admin_console_admin_path(admin), data: { turbo_method: :delete, turbo_confirm: 'Are you sure to delete this admin?' } ,
+          class: 'bg-red-400 text-white p-1 m-1 rounded' do %>
+          <i class="fa-solid fa-trash"></i>
+        <%end%>
+      </td>
+    </tr>
+  <% end %>
+<%else%>
+  <%= turbo_stream.append 'admin-form-container' do %>
+    <div class='absolute top-0'>
+      <%= render partial: 'partials/flash_messages'%>
+    </div>
+  <%end%>
+<%end%>

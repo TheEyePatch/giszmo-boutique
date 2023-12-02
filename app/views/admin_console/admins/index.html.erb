@@ -1,5 +1,9 @@
 <section class="mt-16 px-10">
-  <table class="mx-auto w-full">
+  <div class="button-block flex justify-end">
+    <%= link_to 'Add Admin', new_admin_console_admin_path, data: { turbo_frame: 'modal' }, class: 'p-2 bg-yellow-500 text-white rounded shadow hover:bg-yellow-600' %>
+  </div>
+  
+  <table id="admin-table" class="relative mx-auto w-full">
     <thead>
       <tr class="border-b text-gray-800">
         <td class="p-2 px-4 max-w-xl w-screen">Email</td>
@@ -35,4 +39,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <div class="mx-auto flex justify-center p-4">
+    <%= paginate @admins, window: 3 %>
+  </div>
 </section>

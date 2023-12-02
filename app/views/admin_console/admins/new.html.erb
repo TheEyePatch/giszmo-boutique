@@ -1,0 +1,33 @@
+<%= turbo_frame_tag 'modal' do %>
+  <div class="z-30 fixed flex justify-center items-center top-0 w-screen h-screen bg-opacity-25 bg-black shadow p-1">
+    <div id="admin-form-container" class="relative py-4 px-8 mx-auto mt-5 rounded shadow bg-white w-auto max-w-screen-lg overflow-y-auto max-h-128">
+      <h2 class="text-2xl my-2 antialiased font-medium">New Admin</h2>
+      <%= form_with model: @admin, url: admin_console_admins_path, id: 'admin-form', class: 'relative' do |f|%>
+        <div class="my-5">
+          <%= f.label :email%><br/>
+          <%= f.text_field :email, class: 'border-gray-300 shadow rounded w-96'%>
+        </div>
+
+        <div class="my-5">
+          <%= f.label :username %><br/>
+          <%= f.text_field :username, class: 'border-gray-300 shadow rounded w-96'%>
+        </div>
+
+        <div class="my-5">
+          <%= f.label :password %><br/>
+          <%= f.password_field :password, class: 'border-gray-300 shadow rounded w-96'%>
+        </div>
+
+        <div class="flex justify-end">
+          <%= f.submit "Submit", disable_with: 'Submiting...',
+            class: 'mx-1 p-2 bg-green-500 text-white rounded hover:cursor-pointer hover:bg-green-700'
+          %>
+          <%= link_to "Cancel", admin_console_admins_path,
+            data: { controller: 'modals', action: 'click->modals#close' },
+            class: 'mx-1 p-2 bg-red-500 text-white rounded hover:cursor-pointer hover:bg-red-700'
+          %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<%end%>
