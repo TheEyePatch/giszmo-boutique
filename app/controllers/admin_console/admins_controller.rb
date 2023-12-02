@@ -37,7 +37,7 @@ module AdminConsole
     end
 
     def admin_params
-      params.require(:admin).permit(:email, :username, :password)
+      params.require(:admin).permit(:email, :username, :password, :password_confirmation)
     end
   end
 end
