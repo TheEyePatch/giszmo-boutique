@@ -16,7 +16,7 @@
 
     <tbody id="admin-table-body">
       <% @admins.each do |admin| %>
-        <tr class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:shadow">
+        <tr id=<%= "#{dom_id(admin)}-row" %> class="text-gray-800 mt-2 border-b hover:bg-gray-100 hover:shadow">
           <td class="max-w-xl w-screen">
             <%= button_to admin.email, admin_console_admin_path(admin), class: 'text-left p-4 h-full w-full', method: :get%>
           </td>
@@ -27,6 +27,7 @@
           <td class="p-4 max-w-sm"><%= format_date(admin.updated_at)%></td>
           <td class="p-4">
             <%= link_to edit_admin_console_admin_path(admin),
+              data: { turbo_frame: 'modal' },
               class: 'bg-blue-400 text-white p-1 m-1 rounded' do %>
               <i class="fa-regular fa-pen-to-square"></i>
             <%end%>
