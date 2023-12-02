@@ -53,6 +53,28 @@ module AdminConsole
       end
     end
 
+    def destroy
+      admin.destroy
+
+      if admin.destroyed?
+        respond_to do |format|
+          format.html
+          format.turbo_stream do
+            flash.now[:notice] = 'Successfully deleted admin'
+            render __method__, locals: { admin: admin }
+          end
+        end
+      else
+        respond_to do |format|
+          format.html
+          format.turbo_stream do
+            flash.now[:notice] = admin.errors.full_messages
+            render __method__, locals: { admin: nil }
+          end
+        end
+      end
+    end
+
     private
 
     def admin

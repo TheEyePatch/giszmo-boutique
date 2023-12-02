@@ -31,7 +31,7 @@
               class: 'bg-blue-400 text-white p-1 m-1 rounded' do %>
               <i class="fa-regular fa-pen-to-square"></i>
             <%end%>
-            <%= link_to admin_console_admin_path(admin), data: { turbo_method: :delete, turbo_confirm: 'Are you sure to delete this admin?' } ,
+            <%= link_to admin_console_admin_path(admin), data: { turbo_method: :delete, turbo_confirm: "Are you sure to delete this admin #{admin.username}" } ,
               class: 'bg-red-400 text-white p-1 m-1 rounded' do %>
               <i class="fa-solid fa-trash"></i>
             <%end%>
