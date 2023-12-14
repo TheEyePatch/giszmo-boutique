@@ -6,7 +6,9 @@
   <li class="list-none">
     <%= link_to('Members', admin_console_admins_path)%>
   </li>
-  <li class="list-none">Profile</li>
+  <li class="list-none">
+    <%= link_to 'Profile', admin_console_profile_path(current_admin)%>
+  </li>
   <li class="list-none">Business Profile</li>
   <li class="list-none">
     <%= link_to('Logout', destroy_admin_session_path, data: {turbo_method: :delete}) %>
