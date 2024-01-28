@@ -1,6 +1,8 @@
 module AdminConsole
   class ProfilesController < AdminController
-    def show; end
+    def show
+      @profile = current_admin.profile
+    end
 
     def edit
       profile = Profile.new(profilable: current_admin, first_name: '', last_name: '')
@@ -25,6 +27,13 @@ module AdminConsole
           age
         ]
       )
+    end
+
+    def initialize_breadcrumb
+      super
+
+      breadcrumb.add('Profile', admin_console_profile_path(params[:id])) if params[:id]
+      breadcrumb.add('Edit', edit_admin_console_profile_path(params[:id])) if action_name == 'edit'
     end
   end
 end

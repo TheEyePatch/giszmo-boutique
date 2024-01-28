@@ -1,5 +1,5 @@
 module AdminConsole
-  class AdminsController < ApplicationController
+  class AdminsController < AdminController
     def index
       @admins = Admin.order(id: :desc).page(params[:page])
     end
