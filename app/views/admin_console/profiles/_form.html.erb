@@ -1,0 +1,28 @@
+<%= form_with model: current_admin, url: admin_console_profile_path(profile), class: '' do |f| %>
+  
+  <div>
+    <%= f.label :username%><br/>
+    <%= f.text_field :username, class: 'border border-gray-300 bg-gray-100 rounded p-2 w-full' %>
+  </div>
+
+  <div>
+    <%= f.label :email%><br/>
+    <%= f.text_field :email, class: 'border border-gray-300 bg-gray-100 rounded p-2 w-full' %>
+  </div>
+  
+  <%= f.fields_for :profile, class: 'border' do |p|%>
+    <div class="my-5">
+      <%= p.label :first_name%><br/>
+      <%= p.text_field :first_name, class: 'border border-gray-300 bg-gray-100 rounded p-2 w-full' %>
+    </div>
+
+    <div class="my-5">
+      <%= p.label :last_name%><br/>
+      <%= p.text_field :last_name, class: 'border border-gray-300 bg-gray-100 rounded p-2 w-full' %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.submit "Submit", disable_with: 'Submiting...', class: 'bg-green-500 text-white p-2 rounded'%>
+  </div>
+<%end%>

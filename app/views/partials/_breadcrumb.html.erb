@@ -1,6 +1,6 @@
 
 <% if admin_signed_in? %>
-  <ul id="admin-breadcrumb" class="px-10 p-3 flex text-md">
+  <ul id="admin-breadcrumb" class="flex text-md">
     <% breadcrumbs.each do |item| %>
       <li class="hover:cursor-pointer hover:text-blue-300  mx-1"><%= link_to item[0], item[1] %></li>
       <%= '/' unless breadcrumbs.index(item) == (breadcrumbs.length - 1) %>
